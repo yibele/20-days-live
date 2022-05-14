@@ -16,6 +16,9 @@ export class PlayerManager extends Component {
         EventManger.Instance.on(EVENT_TYPE.PLAYER_MOVE, this.move, this)
         let Collider = this.getComponent(Collider2D)
     }
+    getPlayer() {
+        return this.node;
+    }
 
 }
 

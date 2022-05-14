@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, Prefab, instantiate } from 'cc';
 import { Enemy } from '../Base/Enemy';
 import { Datamanager } from '../Runtime/Datamanager';
 const { ccclass, property } = _decorator;
@@ -9,20 +9,17 @@ const { ccclass, property } = _decorator;
  */
 @ccclass('SpwanManager')
 export class SpwanManager extends Component {
-
-    private _enemys: Array<Enemy> = new Array();
+    @property(Prefab)
+    enmey1: Prefab = null;
 
     init() {
-        // set Position
-        // ser parant
+
     }
 
-    getEnemy() {
-
+    createEnemy() {
     }
 
     handleSchlder() {
-
     }
 
 }

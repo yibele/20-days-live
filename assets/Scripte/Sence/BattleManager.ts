@@ -17,24 +17,14 @@ export class BattleManager extends Component {
     @property(Prefab)
     Rocker: Prefab;
 
-    @property(Prefab)
-    Enemy1: Prefab;
-
     init() {
         this.initPlayer();
         this.initRocker();
-        this.initEnemy();
         this.initCamera();
-
         // save rootNode
         Datamanager.Instance.RootNode = this.node;
         // save PlayerPrefab
         Datamanager.Instance.PlayerPrefab = this.Player;
-        // addSpwanManager;
-        const spwanManager = this.addComponent(SpwanManager)
-        spwanManager.init();
-        Datamanager.Instance.SpwanManager = spwanManager;
-
     }
 
     initCamera() {
@@ -60,16 +50,9 @@ export class BattleManager extends Component {
         Datamanager.Instance.Rocker = rockerManager;
     }
 
-    initEnemy() {
-        const enemy1 = instantiate(this.Enemy1);
-        const enmeyManager = enemy1.addComponent(Enemy1)
-        enemy1.setParent(this.node)
-        enmeyManager.init();
-    }
 
     start() {
         this.init();
     }
-
 }
 
