@@ -1,0 +1,5 @@
+
+export enum EVENT_TYPE {
+    SPWAN_ENEMY = "SPWAN_ENEMY",
+    PLAYER_MOVE = "PLAYER_MOVE"
+}
