@@ -2,6 +2,7 @@
 import { _decorator, Component, Node, Vec2, RigidBody2D, Prefab } from 'cc';
 import { EVENT_TYPE } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
+import { CameraManager } from '../Camera/CameraManager';
 import { PLAYER_INIT_SPEED } from '../Configs/Configs';
 import { SpwanManager } from '../Enemys/SpwanManager';
 import { PlayerManager } from '../Player/PlayerManager';
@@ -13,6 +14,7 @@ const { ccclass, property } = _decorator;
 export class Datamanager extends Singleton {
 
     Player: PlayerManager = null;
+    CameraManager: CameraManager = null;
     PlayerPrefab: Prefab = null;
     Rocker: RockerManager = null;
     RootNode: Node = null;
