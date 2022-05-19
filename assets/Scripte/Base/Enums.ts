@@ -16,3 +16,8 @@ export enum STATE_ENUM_TYPE {
     RUN = "RUN"
 }
 
+export enum ENTITY_TAG_ENUM {
+    ENMEY = 1,
+    PLAYER = 2
+}
+

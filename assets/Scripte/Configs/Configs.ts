@@ -3,11 +3,13 @@ import { Enemy1 } from "../Enemys/Enemy1";
 
 
 //玩家初始速度
-export const PLAYER_INIT_SPEED = 5;
+export const PLAYER_INIT_SPEED = 3;
 //玩家初始生命
 export const PLAYER_INIT_LIFE = 100;
+// 生命条长度
+export const LIFE_BAR_WIDTH = 50;
 
-export const Player = {
+export const PLAYER_CONFIG = {
     PLAYER_INIT_SPEED,
     PLAYER_INIT_LIFE
 }

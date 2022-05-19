@@ -8,8 +8,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Enemy1')
 export class Enemy1 extends Enemy {
-    private _plyaer: Node;
-    private _speed: number = 2;
 
 
     start() {
@@ -17,14 +15,16 @@ export class Enemy1 extends Enemy {
     }
 
     init() {
-        this._plyaer = Datamanager.Instance.Player.getPlayer();
-        this._speed = ENMEY_INIT_SPPED;
+        super.init();
+        this.PlayerNode = Datamanager.Instance.Player.getPlayer();
+        this.Speed = ENMEY_INIT_SPPED;
+        this.Damage = 10;
     }
 
     updateXY() {
         // 获得方向向量
         let pos = this.node.getPosition();
-        let playerPos = this._plyaer.getPosition();
+        let playerPos = this.PlayerNode.getPosition();
         // 归一化向量
         let dir = playerPos.subtract(pos)
         dir.normalize();
@@ -36,7 +36,7 @@ export class Enemy1 extends Enemy {
             this.node.setScale(this.node.getScale())
         }
         // 乘以速度
-        this.getComponent(RigidBody2D).linearVelocity = v2(dir.x * this._speed, dir.y * this._speed)
+        this.getComponent(RigidBody2D).linearVelocity = v2(dir.x * this.Speed, dir.y * this.Speed)
 
         this.pushSelfToView();
     }
@@ -47,7 +47,7 @@ export class Enemy1 extends Enemy {
      * 方便技能可以攻击到
      */
     pushSelfToView() {
-        const playerPos = this._plyaer.getPosition();
+        const playerPos = this.PlayerNode.getPosition();
         const slefPos = this.node.getPosition();
         const distanc = Vec3.distance(playerPos, slefPos);
         if (distanc < ENEMY_IN_VIEW_DIS) {

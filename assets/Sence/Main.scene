@@ -527,7 +527,7 @@
     "_enabled": true,
     "__prefab": null,
     "Player": {
-      "__uuid__": "08f275e7-b011-4057-93d5-97096e9b4d12",
+      "__uuid__": "5bf15546-e305-43a8-b9b1-8eecb5ae412c",
       "__expectedType__": "cc.Prefab"
     },
     "Rocker": {
