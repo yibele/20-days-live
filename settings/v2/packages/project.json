@@ -4,5 +4,21 @@
       "name": "ENTITY",
       "value": 1
     }
-  ]
+  ],
+  "__version__": "1.0.2",
+  "physics": {
+    "collisionGroups": [
+      {
+        "index": 1,
+        "name": "ENTITY"
+      }
+    ],
+    "collisionMatrix": {
+      "0": 1,
+      "1": 2
+    },
+    "gravity": {
+      "y": 0
+    }
+  }
 }

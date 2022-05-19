@@ -1,11 +1,11 @@
 
 import { _decorator, Component, Node, Prefab, instantiate } from 'cc';
 import { CameraManager } from '../Camera/CameraManager';
-import { Enemy1 } from '../Enemys/Enemy1';
-import { SpwanManager } from '../Enemys/SpwanManager';
 import { PlayerManager } from '../Player/PlayerManager';
 import { RockerManager } from '../Rocker/RockerManager';
 import { Datamanager } from '../Runtime/Datamanager';
+import { AssetManager } from '../Runtime/AssetManager';
+import { SpwanManager } from "../Enemys/SpwanManager"
 const { ccclass, property } = _decorator;
 
 @ccclass('BattleManager')
@@ -17,14 +17,28 @@ export class BattleManager extends Component {
     @property(Prefab)
     Rocker: Prefab;
 
-    init() {
+    async init() {
+        await this.loadRes();
         this.initPlayer();
         this.initRocker();
         this.initCamera();
+        this.generateSpwanManager();
         // save rootNode
         Datamanager.Instance.RootNode = this.node;
         // save PlayerPrefab
         Datamanager.Instance.PlayerPrefab = this.Player;
+        // loadResrouces
+
+    }
+
+    generateSpwanManager() {
+        const spwanManager = this.addComponent(SpwanManager)
+        spwanManager.init();
+    }
+
+    async loadRes() {
+        const prefabs = await AssetManager.Intance.loadPrefab('Prefab')
+        Datamanager.Instance.Prefabs = prefabs;
     }
 
     initCamera() {

@@ -12,14 +12,13 @@ export class AssetManager extends Singleton {
         return super.getInstance<AssetManager>();
     }
 
-    loadRes(path: string) {
-        return new Promise((resolve, reject) => {
-            resources.loadDir(path, function (err, asset) {
+    loadPrefab(path: string) {
+        return new Promise<Prefab[]>((resolve, reject) => {
+            resources.loadDir(path, Prefab, function (err, asset) {
                 if (err) {
                     reject(err)
                     return;
                 }
-
                 resolve(asset)
             })
         })

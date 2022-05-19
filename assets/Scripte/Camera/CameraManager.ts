@@ -14,6 +14,6 @@ export class CameraManager extends Component {
     }
 
     lateUpdate() {
-        this.node.setPosition(this.Player.getPosition().x, this.Player.getPosition().y, 1000)
+        this.node.setPosition(this.Player.getPosition().x, this.Player.getPosition().y, 500)
     }
 }

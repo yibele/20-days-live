@@ -1,7 +1,9 @@
 
-import { _decorator, Component, Node, Vec2, EventTouch, v2, UITransformComponent } from 'cc';
+import { _decorator, Component, Node, Vec2, EventTouch, v2, UITransformComponent, RigidBody2D } from 'cc';
+import { EVENT_TYPE } from '../Base/Enums';
 import { PlayerManager } from '../Player/PlayerManager';
 import { Datamanager } from '../Runtime/Datamanager';
+import { EventManger } from '../Runtime/EventManger';
 const { ccclass, property } = _decorator;
 
 @ccclass('RockerManager')
@@ -70,7 +72,8 @@ export class RockerManager extends Component {
         this.joyBar.setPosition(this._disXY.x, this._disXY.y)
         this.fixVelocity();
         // give the _disXY to datamanager to update the speed;
-        Datamanager.Instance.PlyaerVelocity = this._plyaerVelocity;
+        // Datamanager.Instance.PlyaerVelocity = this._plyaerVelocity;
+        EventManger.Instance.emit(EVENT_TYPE.PLAYER_MOVE, this._plyaerVelocity)
     }
 
     /**

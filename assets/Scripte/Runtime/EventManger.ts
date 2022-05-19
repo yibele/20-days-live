@@ -22,6 +22,12 @@ export class EventManger extends Singleton {
         }
     }
 
+    get(eventName: EVENT_TYPE) {
+        if (this._eventDic.has(eventName)) {
+            return this._eventDic.get(eventName)
+        }
+    }
+
     emit(eventName: EVENT_TYPE, ...params: unknown[]) {
         if (this._eventDic.has(eventName)) {
             this._eventDic.get(eventName).forEach(({ func, ctx }) => {
