@@ -63,6 +63,14 @@ export class RockerManager extends Component {
 
 
     /**
+     * fix Plyaer velocity
+     */
+    fixVelocity() {
+        this._plyaerVelocity.x = Datamanager.Instance._PlayerCurrentSpeed / this._maxDistance * this._disXY.x;
+        this._plyaerVelocity.y = Datamanager.Instance._PlayerCurrentSpeed / this._maxDistance * this._disXY.y;
+    }
+
+    /**
      * set the joybar max distance 
      */
     updateVelocity() {
@@ -70,18 +78,10 @@ export class RockerManager extends Component {
             this._disXY.multiply2f(this._maxDistance / this._disXY.length(), this._maxDistance / this._disXY.length())
         }
         this.joyBar.setPosition(this._disXY.x, this._disXY.y)
-        this.fixVelocity();
         // give the _disXY to datamanager to update the speed;
-        // Datamanager.Instance.PlyaerVelocity = this._plyaerVelocity;
+        this.fixVelocity();
+        // 触发PLAYER_MOVE事件
         EventManger.Instance.emit(EVENT_TYPE.PLAYER_MOVE, this._plyaerVelocity)
-    }
-
-    /**
-     * fix Plyaer velocity
-     */
-    fixVelocity() {
-        this._plyaerVelocity.x = Datamanager.Instance._PlayerCurrentSpeed / this._maxDistance * this._disXY.x;
-        this._plyaerVelocity.y = Datamanager.Instance._PlayerCurrentSpeed / this._maxDistance * this._disXY.y;
     }
 
     update() {

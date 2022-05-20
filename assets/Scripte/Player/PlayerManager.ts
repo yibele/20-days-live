@@ -5,6 +5,7 @@ import { ENTITY_TAG_ENUM, EVENT_TYPE, PARAMS_ENUM_TYPE, STATE_ENUM_TYPE } from '
 import { Enemys, LIFE_BAR_WIDTH, PLAYER_CONFIG } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
+import { PlayerStateMachine } from './PlayerStateMachine';
 const { ccclass, property } = _decorator;
 
 @ccclass('PlayerManager')
@@ -14,6 +15,8 @@ export class PlayerManager extends Component {
     private _currentLife: number = 100;
     // 当前最大生命值
     private _totalLife: number = 100;
+    // 有限状态机
+    private _fsm: PlayerStateMachine = null;
 
     move(velecity: Vec2) {
         if (velecity.x < 0) {
@@ -32,7 +35,17 @@ export class PlayerManager extends Component {
         this._lifeBar = this.node.getChildByName('lifeBar')
         this._currentLife = PLAYER_CONFIG.PLAYER_INIT_LIFE;
         this._totalLife = PLAYER_CONFIG.PLAYER_INIT_LIFE;
+        // 有限状态机
+        this._fsm = this.addComponent(PlayerStateMachine)
+        this._fsm.init();
+
         EventManger.Instance.on(EVENT_TYPE.PLAYER_MOVE, this.move, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_HURT, this.hurt, this)
+    }
+
+    onDestroy() {
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_MOVE, this.move)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_HURT, this.hurt)
     }
 
     getPlayer() {

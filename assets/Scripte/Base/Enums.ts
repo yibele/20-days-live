@@ -1,7 +1,8 @@
 
 export enum EVENT_TYPE {
     SPWAN_ENEMY = "SPWAN_ENEMY",
-    PLAYER_MOVE = "PLAYER_MOVE"
+    PLAYER_MOVE = "PLAYER_MOVE",
+    PLAYER_HURT = "PLAYER_HURT"
 }
 
 // 有限状态机中的Pamras类型
@@ -21,3 +22,7 @@ export enum ENTITY_TAG_ENUM {
     PLAYER = 2
 }
 
+export enum PLAYER_ANIMATION_ENUM {
+    IDLE = "IDLE",
+    RUN = "RUN"
+}

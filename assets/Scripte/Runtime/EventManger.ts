@@ -22,6 +22,13 @@ export class EventManger extends Singleton {
         }
     }
 
+    off(eventName: EVENT_TYPE, func: Function) {
+        if (this._eventDic.has(eventName)) {
+            const index = this._eventDic.get(eventName).findIndex(i => i.func === func)
+            this._eventDic.get(eventName).splice(index, 1)
+        }
+    }
+
     get(eventName: EVENT_TYPE) {
         if (this._eventDic.has(eventName)) {
             return this._eventDic.get(eventName)

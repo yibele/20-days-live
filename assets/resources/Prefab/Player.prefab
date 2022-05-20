@@ -205,7 +205,7 @@
     "__prefab": {
       "__id__": 8
     },
-    "playOnLoad": true,
+    "playOnLoad": false,
     "_clips": [
       {
         "__uuid__": "2f116595-c83f-48bc-b206-35b50f7a3a4f",
@@ -237,9 +237,9 @@
     "__prefab": {
       "__id__": 10
     },
-    "enabledContactListener": false,
+    "enabledContactListener": true,
     "bullet": false,
-    "awakeOnLoad": true,
+    "awakeOnLoad": false,
     "_group": 1,
     "_type": 2,
     "_allowSleep": true,

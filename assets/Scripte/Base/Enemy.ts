@@ -2,7 +2,8 @@
 import { _decorator, Component, Node, Collider2D, Contact2DType } from 'cc';
 import { PlayerManager } from '../Player/PlayerManager';
 import { Datamanager } from '../Runtime/Datamanager';
-import { ENTITY_TAG_ENUM } from './Enums';
+import { EventManger } from '../Runtime/EventManger';
+import { ENTITY_TAG_ENUM, EVENT_TYPE } from './Enums';
 const { ccclass, property } = _decorator;
 
 
@@ -29,7 +30,7 @@ export class Enemy extends Component {
             // this.Player.hurt(this.Damage)
             this.ContactTime++;
             if (this.ContactTime === 50) {
-                this.Player.hurt(this.Damage)
+                EventManger.Instance.emit(EVENT_TYPE.PLAYER_HURT, this.Damage)
                 this.ContactTime = 0;
             }
         }

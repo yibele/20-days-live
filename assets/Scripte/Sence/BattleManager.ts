@@ -52,8 +52,8 @@ export class BattleManager extends Component {
         const Player = instantiate(this.Player)
         Player.setParent(this.node)
         const playerManager = Player.addComponent(PlayerManager)
-        playerManager.init();
         Datamanager.Instance.Player = playerManager;
+        playerManager.init();
     }
 
     initRocker() {
