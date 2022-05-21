@@ -7,6 +7,7 @@ import { CameraManager } from '../Camera/CameraManager';
 import { PLAYER_INIT_SPEED } from '../Configs/Configs';
 import { SpwanManager } from '../Enemys/SpwanManager';
 import { PlayerManager } from '../Player/PlayerManager';
+import { PlayerStateMachine } from '../Player/PlayerStateMachine';
 import { RockerManager } from '../Rocker/RockerManager';
 import { EventManger } from './EventManger';
 const { ccclass, property } = _decorator;
@@ -31,6 +32,10 @@ export class Datamanager extends Singleton {
     // 当前在视野内的敌人
     // 方便攻击
     EnemyInView: Array<Enemy> = new Array();
+
+
+
+    fsm: PlayerStateMachine = null;
 
 
     _PlyaerVelocity: Vec2 = new Vec2();

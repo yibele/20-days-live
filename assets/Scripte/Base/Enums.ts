@@ -2,7 +2,8 @@
 export enum EVENT_TYPE {
     SPWAN_ENEMY = "SPWAN_ENEMY",
     PLAYER_MOVE = "PLAYER_MOVE",
-    PLAYER_HURT = "PLAYER_HURT"
+    PLAYER_HURT = "PLAYER_HURT",
+    RESET_PARAMS = "RESET_PARAMS"
 }
 
 // 有限状态机中的Pamras类型
