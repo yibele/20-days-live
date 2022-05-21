@@ -35,7 +35,7 @@ export class PlayerStateMachine extends Component {
         this._params.forEach(i => i.value = false)
     }
 
-    setParamsTure(name: string) {
+    setParamsTure(name: STATE_ENUM_TYPE) {
         if (this._params.get(name).value === false) {
             this._params.get(name).value = true;
             this.run();
@@ -59,7 +59,7 @@ export class PlayerStateMachine extends Component {
     initParams() {
         this._params.set(STATE_ENUM_TYPE.IDLE, {
             type: PARAMS_ENUM_TYPE.TRIGER,
-            value: true
+            value: false
         })
         this._params.set(STATE_ENUM_TYPE.RUN, {
             type: PARAMS_ENUM_TYPE.TRIGER,
@@ -71,13 +71,14 @@ export class PlayerStateMachine extends Component {
         switch (this._currentState) {
             case this._states.get(STATE_ENUM_TYPE.IDLE):
             case this._states.get(STATE_ENUM_TYPE.RUN):
-                if (this._params.get(STATE_ENUM_TYPE.IDLE).value) {
-                    this.currentState = this._states.get(STATE_ENUM_TYPE.IDLE)
-                } else if (this._params.get(STATE_ENUM_TYPE.RUN).value) {
+                if (this._params.get(STATE_ENUM_TYPE.RUN).value) {
                     this.currentState = this._states.get(STATE_ENUM_TYPE.RUN)
+                } else if (this._params.get(STATE_ENUM_TYPE.IDLE).value) {
+                    this.currentState = this._states.get(STATE_ENUM_TYPE.IDLE)
                 }
                 break;
             default:
+                this._currentState = this._currentState
                 break;
         }
     }

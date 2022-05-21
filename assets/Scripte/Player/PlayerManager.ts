@@ -19,13 +19,16 @@ export class PlayerManager extends Component {
     private _fsm: PlayerStateMachine = null;
 
     move(velecity: Vec2) {
-        if (velecity.x < 0) {
-            this.node.getChildByName('body').setScale(v3(-1, 1, 1))
-        } else if (velecity.x > 0) {
-            this.node.getChildByName('body').setScale(v3(1, 1, 1))
-        } else {
-            // 人物在站立状态, 设置状态为站立
+        if (velecity.x === 0) {
             this.node.setScale(this.node.getScale())
+            this._fsm.setParamsTure(STATE_ENUM_TYPE.IDLE)
+        } else {
+            this._fsm.setParamsTure(STATE_ENUM_TYPE.RUN)
+            if (velecity.x > 0) {
+                this.node.getChildByName('body').setScale(v3(1, 1, 1))
+            } else {
+                this.node.getChildByName('body').setScale(v3(-1, 1, 1))
+            }
         }
         this.node.getComponent(RigidBody2D).linearVelocity = velecity;
     }

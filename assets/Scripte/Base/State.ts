@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Animation, AnimationClip } from 'cc';
+import { PlayerStateMachine } from '../Player/PlayerStateMachine';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
 import { EVENT_TYPE, PLAYER_ANIMATION_ENUM } from './Enums';
@@ -8,11 +9,23 @@ const { ccclass, property } = _decorator;
 export class State extends Component {
 
     defualtClip: PLAYER_ANIMATION_ENUM;
+    fsm: PlayerStateMachine;
+    aniComponent: Animation;
+
+    constructor() {
+        super();
+        this.init();
+    }
+
+    init() {
+        this.aniComponent = Datamanager.Instance.Player.getComponentsInChildren(Animation)[0]
+        this.aniComponent.on(Animation.EventType.LASTFRAME, this.resetParams, this)
+    }
+
 
     run() {
-        Datamanager.Instance.Player.node.getChildByName('body').getComponent(Animation).
-            play(this.defualtClip)
-        Datamanager.Instance.Player.node.getChildByName('body').getComponent(Animation).on(Animation.EventType.FINISHED, this.resetParams)
+        this.aniComponent.crossFade(this.defualtClip, 0.2)
+
     }
 
     resetParams() {
