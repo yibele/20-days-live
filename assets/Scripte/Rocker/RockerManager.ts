@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Vec2, EventTouch, v2, UITransformComponent, RigidBody2D } from 'cc';
+import { _decorator, Component, Node, Vec2, EventTouch, v2, UITransformComponent, RigidBody2D, view } from 'cc';
 import { EVENT_TYPE } from '../Base/Enums';
 import { PlayerManager } from '../Player/PlayerManager';
 import { Datamanager } from '../Runtime/Datamanager';
@@ -36,6 +36,12 @@ export class RockerManager extends Component {
         this.joyBar.on(Node.EventType.TOUCH_CANCEL, this.touchCancel, this)
     }
 
+    setPos(pos: Vec2) {
+        const dx = pos.x - view.getVisibleSize().width / 2;
+        const dy = pos.y - view.getVisibleSize().height / 2;
+        this.node.setPosition(dx, dy, 0)
+    }
+
     touchStart(e: EventTouch) {
         this._touchStartPos = e.getLocation();
     }
@@ -54,13 +60,6 @@ export class RockerManager extends Component {
         this._disXY = v2(0, 0)
         this.joyBar.setPosition(0, 0, 0)
     }
-
-    /**
-     * set Player velocity
-     */
-    setPlyaerVelocity() {
-    }
-
 
     /**
      * fix Plyaer velocity

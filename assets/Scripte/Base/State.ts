@@ -24,7 +24,7 @@ export class State extends Component {
 
 
     run() {
-        this.aniComponent.crossFade(this.defualtClip, 0.2)
+        this.aniComponent.crossFade(this.defualtClip, 0.1)
 
     }
 

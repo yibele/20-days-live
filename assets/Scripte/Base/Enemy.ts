@@ -35,6 +35,12 @@ export class Enemy extends Component {
             }
         }
     }
+
+
+    getNodePos() {
+        return this.node.getPosition();
+    }
+
     endContact() {
 
     }

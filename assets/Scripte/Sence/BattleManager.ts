@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Prefab, instantiate } from 'cc';
+import { _decorator, Component, Node, Prefab, instantiate, EventTouch } from 'cc';
 import { CameraManager } from '../Camera/CameraManager';
 import { PlayerManager } from '../Player/PlayerManager';
 import { RockerManager } from '../Rocker/RockerManager';
@@ -10,6 +10,9 @@ const { ccclass, property } = _decorator;
 
 @ccclass('BattleManager')
 export class BattleManager extends Component {
+
+    @property(Prefab)
+    Bullet: Prefab;
 
     @property(Prefab)
     Player: Prefab;
@@ -27,7 +30,6 @@ export class BattleManager extends Component {
         Datamanager.Instance.RootNode = this.node;
         // save PlayerPrefab
         Datamanager.Instance.PlayerPrefab = this.Player;
-        // loadResrouces
 
     }
 
@@ -38,6 +40,7 @@ export class BattleManager extends Component {
 
     async loadRes() {
         const prefabs = await AssetManager.Intance.loadPrefab('Prefab')
+        console.log(prefabs)
         Datamanager.Instance.Prefabs = prefabs;
     }
 
@@ -63,6 +66,7 @@ export class BattleManager extends Component {
         rockerManager.init();
         Datamanager.Instance.Rocker = rockerManager;
     }
+
 
 
     start() {

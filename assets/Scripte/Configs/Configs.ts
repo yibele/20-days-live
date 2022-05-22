@@ -31,3 +31,8 @@ export const ENMEY_SPWAN_TIME = 5;
 export const ENMEY_PER_WAVE = 10;
 // 攻击范围(视野中敌人的距离)
 export const ENEMY_IN_VIEW_DIS = 200;
+
+
+
+//子弹速度
+export const BULLET_SPEED = 5;
