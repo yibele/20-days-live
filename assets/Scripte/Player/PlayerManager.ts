@@ -2,6 +2,7 @@
 import { _decorator, Component, Node, Vec2, RigidBody2D, Collider2D, UITransformComponent, v3, Contact2DType, instantiate, View, Vec3, v2 } from 'cc';
 import { Enemy } from '../Base/Enemy';
 import { EFFECT_NAME_ENUM, ENTITY_TAG_ENUM, EVENT_TYPE, PARAMS_ENUM_TYPE, STATE_ENUM_TYPE } from '../Base/Enums';
+import { Bullet } from '../Bullet/Bullet';
 import { BULLET_SPEED, Enemys, LIFE_BAR_WIDTH, PLAYER_CONFIG } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
@@ -18,7 +19,6 @@ export class PlayerManager extends Component {
     // 有限状态机
     private _fsm: PlayerStateMachine = null;
 
-
     /**
      * 玩家开火
      */
@@ -27,19 +27,9 @@ export class PlayerManager extends Component {
         // 要生成一个子弹
         // 子弹向着最近的敌人发射
         this.schedule(function () {
-            console.log(this.node.getPosition())
-            return;
             const prefab = Datamanager.Instance.Prefabs.find(i => i.data.name === EFFECT_NAME_ENUM.EFFECT_BULLET)
             const bullet = instantiate(prefab)
-            let bulletVelocity = new Vec3(0, 0, 0)
-            const Enemys = Datamanager.Instance.EnemyInView;
-            if (Enemys.length > 0) {
-                bulletVelocity = this.getBulletDir(Enemys[0].getNodePos())
-                bullet.getComponent(RigidBody2D).linearVelocity = v2(bulletVelocity.x * BULLET_SPEED, bulletVelocity.y * BULLET_SPEED);
-                bullet.setParent(Datamanager.Instance.RootNode)
-                bullet.setPosition(this.node.getPosition())
-            }
-
+            bullet.getComponent(Bullet).init();
         }, 2)
     }
 

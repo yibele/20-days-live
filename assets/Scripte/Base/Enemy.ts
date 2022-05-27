@@ -17,6 +17,7 @@ export class Enemy extends Component {
     _enemyId: number = 0;
     Collider: Collider2D = null;
     ContactTime: number = 0;
+    Left: number = 100;
 
     init() {
         this.Player = Datamanager.Instance.Player;
@@ -33,6 +34,20 @@ export class Enemy extends Component {
                 EventManger.Instance.emit(EVENT_TYPE.PLAYER_HURT, this.Damage)
                 this.ContactTime = 0;
             }
+        } else if (other.tag === ENTITY_TAG_ENUM.BULLET) {
+            this.scheduleOnce(() => {
+                // 敌人受到伤害
+                this.hurt();
+            }, 0.01)
+        }
+    }
+
+    hurt() {
+        this.Left -= 50;
+        if (this.Left <= 0) {
+            const index = Datamanager.Instance.EnemyInView.findIndex(i => i._enemyId === this._enemyId)
+            Datamanager.Instance.EnemyInView.splice(index, 1)
+            this.node.destroy();
         }
     }
 
