@@ -4,7 +4,7 @@ import { Enemy } from '../Base/Enemy';
 import { EVENT_TYPE } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
 import { CameraManager } from '../Camera/CameraManager';
-import { PLAYER_INIT_SPEED } from '../Configs/Configs';
+import { PLAYER_CONFIG, PLAYER_INIT_SPEED } from '../Configs/Configs';
 import { SpwanManager } from '../Enemys/SpwanManager';
 import { PlayerManager } from '../Player/PlayerManager';
 import { PlayerStateMachine } from '../Player/PlayerStateMachine';
@@ -27,16 +27,15 @@ export class Datamanager extends Singleton {
     RootNode: Node = null;
     // 刷怪控制器
     SpwanManager: SpwanManager = null;
-    // 当前可以刷新的敌人
-    CurrentEnemys: Array<string> = new Array();
     // 当前在视野内的敌人
     // 方便攻击
     EnemyInView: Array<Enemy> = new Array();
+    // 当前最近的敌人,
+    targetEnemy: Enemy = null;
 
-
+    PlayerFireInternal: number = PLAYER_CONFIG.PLAYER_FIRE_INTERNAL;
 
     fsm: PlayerStateMachine = null;
-
 
     _PlyaerVelocity: Vec2 = new Vec2();
     _PlayerCurrentSpeed: number = PLAYER_INIT_SPEED;

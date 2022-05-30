@@ -8,61 +8,15 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Enemy1')
 export class Enemy1 extends Enemy {
-
-
     start() {
         this.init();
     }
 
     init() {
         super.init();
-        this.PlayerNode = Datamanager.Instance.Player.getPlayer();
         this.Speed = ENMEY_INIT_SPPED;
         this.Damage = 10;
     }
-
-    updateXY() {
-        // 获得方向向量
-        let pos = this.node.getPosition();
-        let playerPos = this.PlayerNode.getPosition();
-        // 归一化向量
-        let dir = playerPos.subtract(pos)
-        dir.normalize();
-        if (dir.x > 0) {
-            this.node.setScale(v3(1, 1, 1))
-        } else if (dir.x < 0) {
-            this.node.setScale(v3(-1, 1, 1))
-        } else {
-            this.node.setScale(this.node.getScale())
-        }
-        // 乘以速度
-        this.getComponent(RigidBody2D).linearVelocity = v2(dir.x * this.Speed, dir.y * this.Speed)
-
-        this.pushSelfToView();
-    }
-
-    /**
-     * 如果自己与玩家的距离在一定的范围之内，
-     * 就把自己添加的Datamanager中的enmeyinView数组中
-     * 方便技能可以攻击到
-     */
-    pushSelfToView() {
-        const playerPos = this.PlayerNode.getPosition();
-        const slefPos = this.node.getPosition();
-        const distanc = Vec3.distance(playerPos, slefPos);
-        if (distanc < ENEMY_IN_VIEW_DIS) {
-            Datamanager.Instance.pushEnemyInView(this)
-        } else {
-            // 删除自己
-            Datamanager.Instance.removeEnemyInView(this._enemyId)
-        }
-    }
-
-    update() {
-        this.updateXY();
-    }
-
-
 }
 
 

@@ -11,16 +11,19 @@ export class Bullet extends Component {
     Player: PlayerManager = null;
     Dir: Vec3 = new Vec3();
     targetEnemy: Enemy = null;
-    speed: number = 5;
+    speed: number = 15;
     Collider: Collider2D = null;
 
     init() {
+        // 获取当前玩家
         this.Player = Datamanager.Instance.Player;
-        this.targetEnemy = Datamanager.Instance.EnemyInView[0];
+        // 获取敌人列表中的第一个敌人
+        this.targetEnemy = Datamanager.Instance.targetEnemy;
+
         this.Collider = this.getComponent(Collider2D)
         this.Collider.on(Contact2DType.BEGIN_CONTACT, this.beginContact, this)
 
-        if (this.targetEnemy !== undefined && this.targetEnemy !== null) {
+        if (this.targetEnemy) {
             const playerPos = this.Player.getPlayer().getPosition();
             const targetEnemyPos = this.targetEnemy.getNodePos();
             this.Dir = targetEnemyPos.subtract(playerPos).normalize();
@@ -30,7 +33,6 @@ export class Bullet extends Component {
             this.node.setPosition(playerPos)
             this.getComponent(Collider2D).tag = ENTITY_TAG_ENUM.BULLET;
         }
-
     }
 
     beginContact(self: Collider2D, other: Collider2D) {

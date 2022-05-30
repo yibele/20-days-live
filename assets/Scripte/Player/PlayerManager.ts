@@ -30,7 +30,7 @@ export class PlayerManager extends Component {
             const prefab = Datamanager.Instance.Prefabs.find(i => i.data.name === EFFECT_NAME_ENUM.EFFECT_BULLET)
             const bullet = instantiate(prefab)
             bullet.getComponent(Bullet).init();
-        }, 2)
+        }, Datamanager.Instance.PlayerFireInternal)
     }
 
     getBulletDir(enemyPos: Vec3) {

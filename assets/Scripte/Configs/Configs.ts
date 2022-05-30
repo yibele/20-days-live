@@ -8,10 +8,13 @@ export const PLAYER_INIT_SPEED = 3;
 export const PLAYER_INIT_LIFE = 100;
 // 生命条长度
 export const LIFE_BAR_WIDTH = 50;
+// 玩家开火初始间隔
+const PLAYER_FIRE_INTERNAL = 1;
 
 export const PLAYER_CONFIG = {
     PLAYER_INIT_SPEED,
-    PLAYER_INIT_LIFE
+    PLAYER_INIT_LIFE,
+    PLAYER_FIRE_INTERNAL
 }
 
 
@@ -30,7 +33,7 @@ export const ENMEY_SPWAN_TIME = 5;
 // 每波敌人的个数
 export const ENMEY_PER_WAVE = 10;
 // 攻击范围(视野中敌人的距离)
-export const ENEMY_IN_VIEW_DIS = 200;
+export const ENEMY_IN_VIEW_DIS = 500;
 
 
 
