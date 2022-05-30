@@ -19,7 +19,7 @@ export class Enemy extends Component {
     Collider: Collider2D = null;
     // 与玩家接触的时间 =》 用来计算伤害间隔
     ContactTime: number = 0;
-    Left: number = 100;
+    Left: number = 500;
     // 判断自己是否在玩家攻击范围内
     InViewTag: boolean = false;
 
@@ -46,6 +46,7 @@ export class Enemy extends Component {
             this.scheduleOnce(() => {
                 // 敌人受到伤害
                 this.hurt();
+                console.log('hurt')
             }, 0.01)
         }
     }
@@ -142,6 +143,5 @@ export class Enemy extends Component {
 
 
     endContact() {
-        this.ContactTime = 0;
     }
 }

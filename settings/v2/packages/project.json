@@ -19,13 +19,18 @@
       {
         "index": 3,
         "name": "ENEMY"
+      },
+      {
+        "index": 4,
+        "name": "WALL"
       }
     ],
     "collisionMatrix": {
       "0": 0,
-      "1": 8,
+      "1": 24,
       "2": 8,
-      "3": 14
+      "3": 14,
+      "4": 2
     },
     "gravity": {
       "y": 0

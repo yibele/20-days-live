@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Vec2, instantiate, Vec3, RigidBody, RigidBody2D, v2, Collider2D, Contact2DType } from 'cc';
+import { _decorator, Component, Node, Vec2, instantiate, Vec3, RigidBody, RigidBody2D, v2, Collider2D, Contact2DType, Animation } from 'cc';
 import { Enemy } from '../Base/Enemy';
 import { ENTITY_TAG_ENUM } from '../Base/Enums';
 import { PlayerManager } from '../Player/PlayerManager';
@@ -35,11 +35,20 @@ export class Bullet extends Component {
         }
     }
 
+    destroyNode() {
+        this.node.destroy();
+    }
+
     beginContact(self: Collider2D, other: Collider2D) {
         if (other.tag === ENTITY_TAG_ENUM.ENMEY) {
-            this.scheduleOnce(() => {
-                this.node.destroy();
-            }, 0.001)
+            this.getComponent(RigidBody2D).linearVelocity = v2(0, 0)
+            // 如果动画正在播放，那么就返回
+            this.getComponent(Animation).once(Animation.EventType.FINISHED, this.destroyNode, this)
+            if (this.getComponent(Animation).getState('1').isPlaying) {
+                return
+            }
+            this.getComponent(Animation).play('1')
+
         }
     }
 
