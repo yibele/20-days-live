@@ -6,6 +6,7 @@ import { RockerManager } from '../Rocker/RockerManager';
 import { Datamanager } from '../Runtime/Datamanager';
 import { AssetManager } from '../Runtime/AssetManager';
 import { SpwanManager } from "../Enemys/SpwanManager"
+import { SchudleHandler } from '../SchudleHandler/SchudleHandler';
 const { ccclass, property } = _decorator;
 
 @ccclass('BattleManager')
@@ -26,6 +27,8 @@ export class BattleManager extends Component {
         this.initRocker();
         this.initCamera();
         this.generateSpwanManager();
+        // 特效功能
+        SchudleHandler.Instance.init();
         // save rootNode
         Datamanager.Instance.RootNode = this.node;
         // save PlayerPrefab

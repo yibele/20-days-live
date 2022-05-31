@@ -34,8 +34,17 @@ export const ENMEY_SPWAN_TIME = 5;
 export const ENMEY_PER_WAVE = 10;
 // 攻击范围(视野中敌人的距离)
 export const ENEMY_IN_VIEW_DIS = 500;
-
-
-
 //子弹速度
 export const BULLET_SPEED = 5;
+
+
+
+// 所有特效设置
+
+const STORM_EXIT_TIME = 2;
+const STORM_SPEED = 10;
+const STORM_DAMAGE = 100;
+const STORM_INTERVAL = 5;
+export const STORM_CONFIG = {
+    STORM_EXIT_TIME, STORM_SPEED, STORM_DAMAGE, STORM_INTERVAL
+}

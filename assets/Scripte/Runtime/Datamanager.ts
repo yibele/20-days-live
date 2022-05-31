@@ -3,6 +3,7 @@ import { _decorator, Component, Node, Vec2, RigidBody2D, Prefab } from 'cc';
 import { Enemy } from '../Base/Enemy';
 import { EVENT_TYPE } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
+import { Storm } from '../Bullet/Storm';
 import { CameraManager } from '../Camera/CameraManager';
 import { PLAYER_CONFIG, PLAYER_INIT_SPEED } from '../Configs/Configs';
 import { SpwanManager } from '../Enemys/SpwanManager';
@@ -14,7 +15,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Datamanager')
 export class Datamanager extends Singleton {
-
     // 玩家
     Player: PlayerManager = null;
     // 玩家摄像机控制器
