@@ -53,13 +53,13 @@ export class Enemy extends Component {
             // 设置与风暴接触的时候，变色
             if (this._isContactWithStorm === false) {
                 this.getComponent(Sprite).color = math.color(0, 141, 153, 255)
-                this.Speed -= 0.01;
+                this.Speed = 0
                 if (this.Speed <= 0) {
                     this.Speed = 0;
                 }
             }
             this.scheduleOnce(() => {
-                this.hurt(10)
+                this.hurt(1)
             }, 0.01)
         }
     }
@@ -169,7 +169,7 @@ export class Enemy extends Component {
         switch (other.tag) {
             case ENTITY_TAG_ENUM.STORM:
                 this._isContactWithStorm = false;
-                this.Speed = 3;
+                this.Speed = 2;
                 this.getComponent(Sprite).color = math.color(255, 255, 255, 255)
                 break;
         }

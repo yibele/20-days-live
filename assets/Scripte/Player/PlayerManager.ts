@@ -20,25 +20,6 @@ export class PlayerManager extends Component {
     private _fsm: PlayerStateMachine = null;
 
     /**
-     * 玩家开火
-    fire() {
-        // 要有一个定时器
-        // 要生成一个子弹
-        // 子弹向着最近的敌人发射
-        this.schedule(function () {
-            const prefab = Datamanager.Instance.Prefabs.find(i => i.data.name === EFFECT_NAME_ENUM.EFFECT_BULLET)
-            const bullet = instantiate(prefab)
-            bullet.getComponent(Bullet).init();
-        }, Datamanager.Instance.PlayerFireInternal)
-    }
-    */
-
-    getBulletDir(enemyPos: Vec3) {
-        const dir = this.node.getPosition().subtract(enemyPos)
-        return v2(dir.normalize().x, dir.normalize().y)
-    }
-
-    /**
      * 
      * @param velecity 玩家的刚体速度
      */
