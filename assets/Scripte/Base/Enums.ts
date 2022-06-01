@@ -22,7 +22,8 @@ export enum STATE_ENUM_TYPE {
 export enum ENTITY_TAG_ENUM {
     ENMEY = 1,
     PLAYER = 2,
-    BULLET = 3
+    BULLET = 3,
+    STORM = 4
 }
 
 export enum PLAYER_ANIMATION_ENUM {

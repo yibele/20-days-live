@@ -46,8 +46,9 @@ export class Enemy extends Component {
             this.scheduleOnce(() => {
                 // 敌人受到伤害
                 this.hurt();
-                console.log('hurt')
             }, 0.01)
+        } else if (other.tag === ENTITY_TAG_ENUM.STORM) {
+            console.log('stormContact')
         }
     }
 

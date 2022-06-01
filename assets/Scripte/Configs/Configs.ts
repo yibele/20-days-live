@@ -1,7 +1,3 @@
-import { IEnmeys } from "../Base/Interfaces";
-import { Enemy1 } from "../Enemys/Enemy1";
-
-
 //玩家初始速度
 export const PLAYER_INIT_SPEED = 3;
 //玩家初始生命
@@ -42,7 +38,7 @@ export const BULLET_SPEED = 5;
 // 所有特效设置
 
 const STORM_EXIT_TIME = 2;
-const STORM_SPEED = 10;
+const STORM_SPEED = 5;
 const STORM_DAMAGE = 100;
 const STORM_INTERVAL = 5;
 export const STORM_CONFIG = {

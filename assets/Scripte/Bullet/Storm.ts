@@ -1,4 +1,4 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, Collider2D, Contact2DType } from 'cc';
 import { Enemy } from '../Base/Enemy';
 import { STORM_CONFIG } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
@@ -33,6 +33,11 @@ export class Storm extends Component {
         if (this._enemyInView.length <= 0) {
             return;
         }
+
+        const collider = this.getComponent(Collider2D);
+        collider.on(Contact2DType.BEGIN_CONTACT, () => {
+            console.log("stormContact")
+        })
 
         // 设置风暴的位置
         this.setPosition();
@@ -70,7 +75,7 @@ export class Storm extends Component {
 
     update() {
         if (this._activeTag) {
-            this.updateXY();
+            // this.updateXY();
         }
     }
 

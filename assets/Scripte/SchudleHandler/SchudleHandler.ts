@@ -66,7 +66,6 @@ export class SchudleHandler extends Singleton {
         if (this.activeEffects.get(EFFECT_NAME_ENUM.STORM)) {
             var that = this;
             this.schedule(function () {
-                console.log(this.stormPool)
                 for (let i = 0; i < that._stormNum; i++) {
                     let storm = that.getStorm();
                     storm.getComponent(Storm).init()
