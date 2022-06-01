@@ -1,6 +1,7 @@
 
 import { _decorator, Component, Node, Collider2D, Contact2DType, Vec3, RigidBody2D, v2, v3, spriteAssembler, Sprite, math } from 'cc';
 import { ENEMY_IN_VIEW_DIS } from '../Configs/Configs';
+import { SpwanManager } from '../Enemys/SpwanManager';
 import { PlayerManager } from '../Player/PlayerManager';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
@@ -19,7 +20,7 @@ export class Enemy extends Component {
     Collider: Collider2D = null;
     // 与玩家接触的时间 =》 用来计算伤害间隔
     ContactTime: number = 0;
-    Left: number = 200;
+    Left: number;
     // 判断自己是否在玩家攻击范围内
     InViewTag: boolean = false;
     // 跟风暴接触的时候，需要变成蓝色并减速
@@ -31,7 +32,6 @@ export class Enemy extends Component {
         this.Collider = this.getComponent(Collider2D);
         this.Collider.on(Contact2DType.BEGIN_CONTACT, this.beginContact, this)
         this.Collider.on(Contact2DType.END_CONTACT, this.endContact, this)
-
         // 计时器
         this.schedule(this.scheduleHandler, 0.5)
     }
@@ -65,14 +65,26 @@ export class Enemy extends Component {
     }
 
     hurt(damage: number) {
+        // 减少生命
         this.Left -= damage;
+        // 如果生命小于等于1
         if (this.Left <= 0) {
             const index = Datamanager.Instance.EnemyInView.findIndex(i => i._enemyId === this._enemyId)
+            // 从视野敌人中删除
             Datamanager.Instance.EnemyInView.splice(index, 1)
+            // 删除当前敌人
             if (Datamanager.Instance.targetEnemy === this) {
                 Datamanager.Instance.targetEnemy = null;
             }
-            this.node.destroy();
+            // 如果当前的敌人就是现在这个敌人，那么就将敌人回收至对象池中
+            if (SpwanManager.Instance.currentEnemy === this.node.name) {
+                this.node.active = false;
+                this.Left = 200;
+                // 将节点存入对象池中
+                EventManger.Instance.emit(EVENT_TYPE.PUSH_ENEMY, this.node)
+            } else {
+                this.node.destroy();
+            }
         }
     }
     // 获取与玩家的距离
@@ -115,8 +127,6 @@ export class Enemy extends Component {
         }
         // 乘以速度
         this.getComponent(RigidBody2D).linearVelocity = v2(dir.x * this.Speed, dir.y * this.Speed)
-
-        // this.pushSelfToView();
     }
 
     /**

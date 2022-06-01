@@ -69,9 +69,8 @@ export class SchudleHandler extends Singleton {
     handleBullet() {
         var that = this;
         this.schedule(() => {
-            console.log('bulletpool', this._bulletPool)
             const bullet = that.getBullet();
-            const manager = bullet.addComponent(Bullet)
+            const manager = bullet.getComponent(Bullet)
             manager.init();
         }, that._bulletInterval)
     }
@@ -83,7 +82,9 @@ export class SchudleHandler extends Singleton {
             if (this._bulletPrefab === null) {
                 this._bulletPrefab = Datamanager.Instance.Prefabs.find(i => i.data.name === EFFECT_NAME_ENUM.EFFECT_BULLET)
             }
-            return instantiate(this._bulletPrefab)
+            const bullet = instantiate(this._bulletPrefab)
+            bullet.addComponent(Bullet)
+            return bullet;
         }
     }
 

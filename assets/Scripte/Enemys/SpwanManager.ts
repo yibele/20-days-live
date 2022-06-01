@@ -2,6 +2,7 @@
 import { _decorator, Component, Node, Prefab, instantiate, view, Vec3 } from 'cc';
 import { Enemy } from '../Base/Enemy';
 import { EVENT_TYPE } from '../Base/Enums';
+import { Singleton } from '../Base/Singleton';
 import { ENMEY_PER_WAVE, ENMEY_SPWAN_TIME } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
@@ -9,30 +10,70 @@ const { ccclass, property } = _decorator;
 
 /**
  * 刷怪控制器
+ * 6.1 设计思路
+ * 
  */
 @ccclass('SpwanManager')
-export class SpwanManager extends Component {
+export class SpwanManager extends Singleton {
+    // 敌人的对象池
+    private _enemyPools: Array<Node> = new Array();
+    // 当前应当刷新的敌人
+    private _currentEnemy: string = 'Enemy2'
+
     private enemy: Node = null;
-    private i = 0;
+    private id = 0;
+
+    static get Instance() {
+        return super.getInstance<SpwanManager>();
+    }
+
+    get currentEnemy() {
+        return this._currentEnemy;
+    }
+
+    set currentEnemy(enemyName: string) {
+        this._currentEnemy = enemyName;
+        // 更换了当前应当刷新的敌人后，就要清空对象池。
+        if (this._enemyPools.length > 0) {
+            // 销毁对象
+            this._enemyPools.forEach(i => i.destroy())
+            // 初始化对象池
+            this._enemyPools = []
+        }
+    }
 
     init() {
         // 保存节点
         Datamanager.Instance.SpwanManager = this;
         // 注册事件
         EventManger.Instance.on(EVENT_TYPE.SPWAN_ENEMY, this.createEnemy, this)
+        // 从对象池获取敌人
+        EventManger.Instance.on(EVENT_TYPE.GET_ENEMY, this.getEnemy, this)
+        // 将敌人放入对象池
+        EventManger.Instance.on(EVENT_TYPE.PUSH_ENEMY, this.pushEnemy, this)
         this.handleSchlder();
         this.spwanEnemy();
     }
 
+    getEnemy() {
+        if (this._enemyPools.length > 0) {
+            return this._enemyPools.pop();
+        } else {
+            const enemy = Datamanager.Instance.Prefabs.find(i => i.data.name === this.currentEnemy)
+            return instantiate(enemy)
+        }
+    }
+
+    pushEnemy(enemy: Node) {
+        this._enemyPools.push(enemy)
+    }
+
     createEnemy() {
-        // 随机生成位置
         let pos = new Vec3();
         const plyaerPos = Datamanager.Instance.Player.getPlayer().getPosition()
-        // 刷新点设置在玩家视野外的某个点
+        console.log('enemyPool', this._enemyPools)
         for (let i = 0; i < ENMEY_PER_WAVE; i++) {
-            // pos.x = plyaerPos.x + view.getVisibleSize().width * (2 * Math.random() - 1);
-            // pos.y = plyaerPos.y + view.getVisibleSize().height * (2 * Math.random() - 1);
-            // 首先生成1-2的一个数字，
+
             let t = Math.random() + 0.5;
             let z = Math.random() + 0.5;
             // 随机生成-1 或者 1
@@ -42,24 +83,13 @@ export class SpwanManager extends Component {
             } else {
                 f = -1;
             }
-            // 指定随机位置
+
             pos.x = plyaerPos.x + view.getVisibleSize().width * f * t;
             pos.y = plyaerPos.y + view.getVisibleSize().height * f * z;
-            let enemy = null;
-
-            if (this.enemy === null) {
-                // 获取enemyPrefab
-                let prefab = Datamanager.Instance.Prefabs.find(i => i.data.name === 'Enemy1')
-                enemy = instantiate(prefab);
-            } else {
-                enemy = instantiate(this.enemy)
-            }
-            // 设置enemy ID；
-            enemy.getComponent(Enemy)._enemyId = this.i;
-            this.i++;
-            // 设置位置
+            const enemy = this.getEnemy();
+            enemy.getComponent(Enemy)._enemyId = this.id;
+            this.id++;
             enemy.setPosition(pos)
-            // 设置parent
             enemy.setParent(this.node);
         }
     }
@@ -69,7 +99,7 @@ export class SpwanManager extends Component {
     }
 
     handleSchlder() {
-        this.schedule(this.spwanEnemy, 8)
+        this.schedule(this.spwanEnemy, ENMEY_SPWAN_TIME)
     }
 
 }

@@ -36,7 +36,6 @@ export const BULLET_SPEED = 5;
 
 
 // 所有特效设置
-
 const STORM_EXIT_TIME = 2;
 const STORM_SPEED = 5;
 const STORM_DAMAGE = 100;

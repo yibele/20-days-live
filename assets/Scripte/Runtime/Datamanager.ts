@@ -10,11 +10,11 @@ import { SpwanManager } from '../Enemys/SpwanManager';
 import { PlayerManager } from '../Player/PlayerManager';
 import { PlayerStateMachine } from '../Player/PlayerStateMachine';
 import { RockerManager } from '../Rocker/RockerManager';
-import { EventManger } from './EventManger';
 const { ccclass, property } = _decorator;
 
 @ccclass('Datamanager')
 export class Datamanager extends Singleton {
+
     // 玩家
     Player: PlayerManager = null;
     // 玩家摄像机控制器
@@ -45,6 +45,7 @@ export class Datamanager extends Singleton {
     static get Instance() {
         return super.getInstance<Datamanager>();
     }
+
 
     set PlyaerVelocity(newVelocity: Vec2) {
         this._PlyaerVelocity = newVelocity;

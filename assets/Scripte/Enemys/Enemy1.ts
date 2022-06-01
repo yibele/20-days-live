@@ -8,15 +8,17 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Enemy1')
 export class Enemy1 extends Enemy {
-    Left = 300;
+
     start() {
         this.init();
     }
 
     init() {
         super.init();
+        console.log('enemy1 init')
         this.Speed = ENMEY_INIT_SPPED;
         this.Damage = 10;
+        this.Left = 200;
     }
 }
 
