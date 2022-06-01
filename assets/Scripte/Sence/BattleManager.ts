@@ -13,9 +13,6 @@ const { ccclass, property } = _decorator;
 export class BattleManager extends Component {
 
     @property(Prefab)
-    Bullet: Prefab;
-
-    @property(Prefab)
     Player: Prefab;
 
     @property(Prefab)
@@ -69,8 +66,6 @@ export class BattleManager extends Component {
         rockerManager.init();
         Datamanager.Instance.Rocker = rockerManager;
     }
-
-
 
     start() {
         this.init();
