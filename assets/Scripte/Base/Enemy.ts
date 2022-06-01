@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Collider2D, Contact2DType, Vec3, RigidBody2D, v2, v3 } from 'cc';
+import { _decorator, Component, Node, Collider2D, Contact2DType, Vec3, RigidBody2D, v2, v3, spriteAssembler, Sprite, math } from 'cc';
 import { ENEMY_IN_VIEW_DIS } from '../Configs/Configs';
 import { PlayerManager } from '../Player/PlayerManager';
 import { Datamanager } from '../Runtime/Datamanager';
@@ -13,7 +13,7 @@ const { ccclass, property } = _decorator;
 export class Enemy extends Component {
     Player: PlayerManager = null;
     PlayerNode: Node = null;
-    Speed: number = 2;
+    Speed: number = 3;
     Damage: number = 0;
     _enemyId: number = 0;
     Collider: Collider2D = null;
@@ -22,6 +22,8 @@ export class Enemy extends Component {
     Left: number = 200;
     // 判断自己是否在玩家攻击范围内
     InViewTag: boolean = false;
+    // 跟风暴接触的时候，需要变成蓝色并减速
+    _isContactWithStorm: boolean = false;
 
     init() {
         this.Player = Datamanager.Instance.Player;
@@ -48,6 +50,14 @@ export class Enemy extends Component {
                 this.hurt(50);
             }, 0.01)
         } else if (other.tag === ENTITY_TAG_ENUM.STORM) {
+            // 设置与风暴接触的时候，变色
+            if (this._isContactWithStorm === false) {
+                this.getComponent(Sprite).color = math.color(0, 141, 153, 255)
+                this.Speed -= 0.01;
+                if (this.Speed <= 0) {
+                    this.Speed = 0;
+                }
+            }
             this.scheduleOnce(() => {
                 this.hurt(10)
             }, 0.01)
@@ -145,6 +155,13 @@ export class Enemy extends Component {
     // 获取自身与玩家之间的距离
 
 
-    endContact() {
+    endContact(slef: Collider2D, other: Collider2D) {
+        switch (other.tag) {
+            case ENTITY_TAG_ENUM.STORM:
+                this._isContactWithStorm = false;
+                this.Speed = 3;
+                this.getComponent(Sprite).color = math.color(255, 255, 255, 255)
+                break;
+        }
     }
 }
