@@ -34,11 +34,6 @@ export class Storm extends Component {
             return;
         }
 
-        const collider = this.getComponent(Collider2D);
-        collider.on(Contact2DType.BEGIN_CONTACT, () => {
-            console.log("stormContact")
-        })
-
         // 设置风暴的位置
         this.setPosition();
         // 持续时间之后，关闭storm；

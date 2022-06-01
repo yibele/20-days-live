@@ -3,6 +3,7 @@ import { Enemy } from '../Base/Enemy';
 import { ENTITY_TAG_ENUM } from '../Base/Enums';
 import { PlayerManager } from '../Player/PlayerManager';
 import { Datamanager } from '../Runtime/Datamanager';
+import { SchudleHandler } from '../SchudleHandler/SchudleHandler';
 const { ccclass, property } = _decorator;
 
 @ccclass('Bulet')
@@ -36,7 +37,8 @@ export class Bullet extends Component {
     }
 
     destroyNode() {
-        this.node.destroy();
+        this.node.active = false;
+        SchudleHandler.Instance.pushBullet(this.node)
     }
 
     beginContact(self: Collider2D, other: Collider2D) {

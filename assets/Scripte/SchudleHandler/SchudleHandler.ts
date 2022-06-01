@@ -2,6 +2,7 @@ import { _decorator, Component, Node, Prefab, instantiate } from 'cc';
 import { Effect } from '../Base/Effect';
 import { EFFECT_NAME_ENUM } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
+import { Bullet } from '../Bullet/Bullet';
 import { Storm } from '../Bullet/Storm';
 import { STORM_CONFIG } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
@@ -22,13 +23,20 @@ export class SchudleHandler extends Singleton {
     // 风暴的pool
     private stormPool: Array<Node> = new Array();
     // 风暴数量
-    private _stormNum: number = 1;
+    private _stormNum: number = 2;
     // 风暴刷新时间
     private _stormInterval: number = STORM_CONFIG.STORM_INTERVAL;
     // 风暴持续时间
     private _stormExitTime: number = STORM_CONFIG.STORM_EXIT_TIME;
     // 风暴的预制体
     private _stormPrefab: Prefab = null;
+
+    // 子弹预制体
+    private _bulletPrefab: Prefab = null;
+    // 子弹发射间隔
+    private _bulletInterval: number = 1;
+    // 子弹的对象池
+    private _bulletPool: Array<Node> = new Array();
 
 
     static get Instance() {
@@ -49,13 +57,38 @@ export class SchudleHandler extends Singleton {
 
     handleSchulder() {
         // 刷新子弹
-
+        this.handleBullet();
         // 刷新激活的特效
         this.handleEffect();
     }
 
     handleEffect() {
         this.handleStorm();
+    }
+
+    handleBullet() {
+        var that = this;
+        this.schedule(() => {
+            console.log('bulletpool', this._bulletPool)
+            const bullet = that.getBullet();
+            const manager = bullet.addComponent(Bullet)
+            manager.init();
+        }, that._bulletInterval)
+    }
+
+    getBullet() {
+        if (this._bulletPool.length > 0) {
+            return this._bulletPool.pop();
+        } else {
+            if (this._bulletPrefab === null) {
+                this._bulletPrefab = Datamanager.Instance.Prefabs.find(i => i.data.name === EFFECT_NAME_ENUM.EFFECT_BULLET)
+            }
+            return instantiate(this._bulletPrefab)
+        }
+    }
+
+    pushBullet(bullet: Node) {
+        this._bulletPool.push(bullet)
     }
 
     /**

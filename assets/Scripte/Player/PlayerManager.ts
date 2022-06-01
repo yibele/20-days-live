@@ -21,7 +21,6 @@ export class PlayerManager extends Component {
 
     /**
      * 玩家开火
-     */
     fire() {
         // 要有一个定时器
         // 要生成一个子弹
@@ -32,6 +31,7 @@ export class PlayerManager extends Component {
             bullet.getComponent(Bullet).init();
         }, Datamanager.Instance.PlayerFireInternal)
     }
+    */
 
     getBulletDir(enemyPos: Vec3) {
         const dir = this.node.getPosition().subtract(enemyPos)
@@ -65,7 +65,7 @@ export class PlayerManager extends Component {
         // 有限状态机
         this._fsm = this.addComponent(PlayerStateMachine)
         this._fsm.init();
-        this.fire();
+        // this.fire();
         EventManger.Instance.on(EVENT_TYPE.PLAYER_MOVE, this.move, this)
         EventManger.Instance.on(EVENT_TYPE.PLAYER_HURT, this.hurt, this)
         // EventManger.Instance.on(EVENT_TYPE.PLAYER_FIRE, this.fire, this)
