@@ -66,11 +66,6 @@ export class PlayerManager extends Component {
         this._fsm = this.addComponent(PlayerStateMachine)
         this._fsm.init();
         this.fire();
-
-        this.getComponent(Collider2D).on(Contact2DType.BEGIN_CONTACT, function () {
-            console.log('acon')
-        })
-
         EventManger.Instance.on(EVENT_TYPE.PLAYER_MOVE, this.move, this)
         EventManger.Instance.on(EVENT_TYPE.PLAYER_HURT, this.hurt, this)
         // EventManger.Instance.on(EVENT_TYPE.PLAYER_FIRE, this.fire, this)

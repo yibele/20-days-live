@@ -4,7 +4,7 @@ import { ENEMY_IN_VIEW_DIS } from '../Configs/Configs';
 import { PlayerManager } from '../Player/PlayerManager';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
-import { ENTITY_TAG_ENUM, EVENT_TYPE } from './Enums';
+import { EFFECT_NAME_ENUM, ENTITY_TAG_ENUM, EVENT_TYPE } from './Enums';
 const { ccclass, property } = _decorator;
 
 
@@ -19,7 +19,7 @@ export class Enemy extends Component {
     Collider: Collider2D = null;
     // 与玩家接触的时间 =》 用来计算伤害间隔
     ContactTime: number = 0;
-    Left: number = 500;
+    Left: number = 200;
     // 判断自己是否在玩家攻击范围内
     InViewTag: boolean = false;
 
@@ -45,15 +45,17 @@ export class Enemy extends Component {
         } else if (other.tag === ENTITY_TAG_ENUM.BULLET) {
             this.scheduleOnce(() => {
                 // 敌人受到伤害
-                this.hurt();
+                this.hurt(50);
             }, 0.01)
         } else if (other.tag === ENTITY_TAG_ENUM.STORM) {
-            console.log('stormContact')
+            this.scheduleOnce(() => {
+                this.hurt(10)
+            }, 0.01)
         }
     }
 
-    hurt() {
-        this.Left -= 50;
+    hurt(damage: number) {
+        this.Left -= damage;
         if (this.Left <= 0) {
             const index = Datamanager.Instance.EnemyInView.findIndex(i => i._enemyId === this._enemyId)
             Datamanager.Instance.EnemyInView.splice(index, 1)
