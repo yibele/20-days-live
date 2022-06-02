@@ -52,14 +52,14 @@ export class Enemy extends Component {
         } else if (other.tag === ENTITY_TAG_ENUM.STORM) {
             // 设置与风暴接触的时候，变色
             if (this._isContactWithStorm === false) {
-                this.getComponent(Sprite).color = math.color(0, 141, 153, 255)
+                // this.getComponent(Sprite).color = math.color(0, 141, 153, 255)
                 this.Speed = 0
                 if (this.Speed <= 0) {
                     this.Speed = 0;
                 }
             }
             this.scheduleOnce(() => {
-                this.hurt(1)
+                this.hurt(5)
             }, 0.01)
         }
     }
