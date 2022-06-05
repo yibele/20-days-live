@@ -1,0 +1,290 @@
+{
+  "ver": "1.0.6",
+  "importer": "sprite-atlas",
+  "imported": true,
+  "uuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1",
+  "files": [
+    ".plist",
+    ".json"
+  ],
+  "subMetas": {
+    "82409": {
+      "importer": "sprite-frame",
+      "uuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1@82409",
+      "displayName": "",
+      "id": "82409",
+      "name": "B_witch_run_03",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 96,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "66db5bb2-3537-4aba-8611-6c5dc0a7bc3e@6c48a",
+        "atlasUuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "92619": {
+      "importer": "sprite-frame",
+      "uuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1@92619",
+      "displayName": "",
+      "id": "92619",
+      "name": "B_witch_run_01",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "66db5bb2-3537-4aba-8611-6c5dc0a7bc3e@6c48a",
+        "atlasUuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1040b": {
+      "importer": "sprite-frame",
+      "uuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1@1040b",
+      "displayName": "",
+      "id": "1040b",
+      "name": "B_witch_run_02",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 48,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "66db5bb2-3537-4aba-8611-6c5dc0a7bc3e@6c48a",
+        "atlasUuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "19c3e": {
+      "importer": "sprite-frame",
+      "uuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1@19c3e",
+      "displayName": "",
+      "id": "19c3e",
+      "name": "B_witch_run_04",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 144,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "66db5bb2-3537-4aba-8611-6c5dc0a7bc3e@6c48a",
+        "atlasUuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3ead1": {
+      "importer": "sprite-frame",
+      "uuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1@3ead1",
+      "displayName": "",
+      "id": "3ead1",
+      "name": "B_witch_run_05",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 192,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "66db5bb2-3537-4aba-8611-6c5dc0a7bc3e@6c48a",
+        "atlasUuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "66fb0": {
+      "importer": "sprite-frame",
+      "uuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1@66fb0",
+      "displayName": "",
+      "id": "66fb0",
+      "name": "B_witch_run_06",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 240,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "66db5bb2-3537-4aba-8611-6c5dc0a7bc3e@6c48a",
+        "atlasUuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ce330": {
+      "importer": "sprite-frame",
+      "uuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1@ce330",
+      "displayName": "",
+      "id": "ce330",
+      "name": "B_witch_run_07",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 288,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "66db5bb2-3537-4aba-8611-6c5dc0a7bc3e@6c48a",
+        "atlasUuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e4959": {
+      "importer": "sprite-frame",
+      "uuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1@e4959",
+      "displayName": "",
+      "id": "e4959",
+      "name": "B_witch_run_08",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 336,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "66db5bb2-3537-4aba-8611-6c5dc0a7bc3e@6c48a",
+        "atlasUuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "atlasTextureName": "witch_run.png",
+    "format": 3,
+    "uuid": "6a8ce377-5a17-4624-a2a8-8cca13bdc4c1",
+    "textureUuid": "66db5bb2-3537-4aba-8611-6c5dc0a7bc3e@6c48a"
+  }
+}

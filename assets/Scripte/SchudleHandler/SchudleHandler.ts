@@ -23,7 +23,7 @@ export class SchudleHandler extends Singleton {
     // 风暴的pool
     private stormPool: Array<Node> = new Array();
     // 风暴数量
-    private _stormNum: number = 2;
+    private _stormNum: number = 6;
     // 风暴刷新时间
     private _stormInterval: number = STORM_CONFIG.STORM_INTERVAL;
     // 风暴持续时间

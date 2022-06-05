@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Prefab, instantiate, v3 } from 'cc';
+import { _decorator, Component, Node, Prefab, instantiate, v3, Label } from 'cc';
 import { Singleton } from '../Base/Singleton';
 import { Datamanager } from '../Runtime/Datamanager';
 import { Zuanshi } from './Zuanshi';
@@ -9,6 +9,8 @@ export class ZuanshiManager extends Singleton {
     private _zuanshiPool: Array<Node> = new Array();
     private _prefab: Prefab = null;
     private _initTag: boolean = false;
+    private _jingyantiao: Node = null;
+    private _lv: Label = null;
 
     static get Instance() {
         return super.getInstance<ZuanshiManager>()

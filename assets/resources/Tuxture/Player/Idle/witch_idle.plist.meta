@@ -1,0 +1,222 @@
+{
+  "ver": "1.0.6",
+  "importer": "sprite-atlas",
+  "imported": true,
+  "uuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856",
+  "files": [
+    ".plist",
+    ".json"
+  ],
+  "subMetas": {
+    "2b00a": {
+      "importer": "sprite-frame",
+      "uuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856@2b00a",
+      "displayName": "",
+      "id": "2b00a",
+      "name": "B_witch_idle_01",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "c690db5d-c823-47e7-9c56-b77b94dc2a35@6c48a",
+        "atlasUuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6be49": {
+      "importer": "sprite-frame",
+      "uuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856@6be49",
+      "displayName": "",
+      "id": "6be49",
+      "name": "B_witch_idle_02",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 48,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "c690db5d-c823-47e7-9c56-b77b94dc2a35@6c48a",
+        "atlasUuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "0efc5": {
+      "importer": "sprite-frame",
+      "uuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856@0efc5",
+      "displayName": "",
+      "id": "0efc5",
+      "name": "B_witch_idle_03",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 96,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "c690db5d-c823-47e7-9c56-b77b94dc2a35@6c48a",
+        "atlasUuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "fa55a": {
+      "importer": "sprite-frame",
+      "uuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856@fa55a",
+      "displayName": "",
+      "id": "fa55a",
+      "name": "B_witch_idle_04",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 144,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "c690db5d-c823-47e7-9c56-b77b94dc2a35@6c48a",
+        "atlasUuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b0724": {
+      "importer": "sprite-frame",
+      "uuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856@b0724",
+      "displayName": "",
+      "id": "b0724",
+      "name": "B_witch_idle_05",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 192,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "c690db5d-c823-47e7-9c56-b77b94dc2a35@6c48a",
+        "atlasUuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "925e4": {
+      "importer": "sprite-frame",
+      "uuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856@925e4",
+      "displayName": "",
+      "id": "925e4",
+      "name": "B_witch_idle_06",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 240,
+        "width": 32,
+        "height": 48,
+        "rawWidth": 32,
+        "rawHeight": 48,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "c690db5d-c823-47e7-9c56-b77b94dc2a35@6c48a",
+        "atlasUuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "atlasTextureName": "witch_idle.png",
+    "format": 3,
+    "uuid": "7fc93da2-bbc7-4100-87ad-17e03e83e856",
+    "textureUuid": "c690db5d-c823-47e7-9c56-b77b94dc2a35@6c48a"
+  }
+}

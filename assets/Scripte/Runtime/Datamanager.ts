@@ -7,6 +7,7 @@ import { Storm } from '../Bullet/Storm';
 import { CameraManager } from '../Camera/CameraManager';
 import { PLAYER_CONFIG, PLAYER_INIT_SPEED } from '../Configs/Configs';
 import { SpwanManager } from '../Enemys/SpwanManager';
+import { JIngyantiao } from '../Item/JIngyantiao';
 import { PlayerManager } from '../Player/PlayerManager';
 import { PlayerStateMachine } from '../Player/PlayerStateMachine';
 import { RockerManager } from '../Rocker/RockerManager';
@@ -14,8 +15,18 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Datamanager')
 export class Datamanager extends Singleton {
+    // 经验条
+    jingyantiao: JIngyantiao = null;
     // 钻石吸收的距离
     zuanshiXishouLen: number = 20;
+    // 当前经验
+    _currentEx: number = 0;
+    // 升级所需经验
+    maxEx: number = 100;
+    // 当前玩家等级
+    currentLv: number = 0;
+    // 每个钻石获得经验
+    zuanshiEx: number = 20;
 
     // 玩家
     Player: PlayerManager = null;
@@ -46,6 +57,15 @@ export class Datamanager extends Singleton {
 
     static get Instance() {
         return super.getInstance<Datamanager>();
+    }
+
+    set currentEx(newEx: number) {
+        this.currentEx = newEx;
+        // 经验条render逻辑
+    }
+
+    get currentEx() {
+        return this._currentEx;
     }
 
 

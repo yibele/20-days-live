@@ -43,3 +43,12 @@ const STORM_INTERVAL = 5;
 export const STORM_CONFIG = {
     STORM_EXIT_TIME, STORM_SPEED, STORM_DAMAGE, STORM_INTERVAL
 }
+
+
+/*********** 钻石相关设置，经验相关设置**********/
+// 钻石吸收的距离
+export const ZUANSHI_XISHOU_LEN = 20;
+//每颗钻石经验
+export const ZUANSHI_JINGYAN = 20;
+
+
