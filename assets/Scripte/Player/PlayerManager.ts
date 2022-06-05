@@ -58,6 +58,10 @@ export class PlayerManager extends Component {
         // EventManger.Instance.off(EVENT_TYPE.PLAYER_FIRE, this.fire)
     }
 
+    getPlayerPosition() {
+        return this.node.getPosition();
+    }
+
     getPlayer() {
         return this.node;
     }

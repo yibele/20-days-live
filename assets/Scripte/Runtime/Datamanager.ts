@@ -14,6 +14,8 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Datamanager')
 export class Datamanager extends Singleton {
+    // 钻石吸收的距离
+    zuanshiXishouLen: number = 20;
 
     // 玩家
     Player: PlayerManager = null;

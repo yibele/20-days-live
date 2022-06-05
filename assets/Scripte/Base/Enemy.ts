@@ -2,6 +2,7 @@
 import { _decorator, Component, Node, Collider2D, Contact2DType, Vec3, RigidBody2D, v2, v3, spriteAssembler, Sprite, math } from 'cc';
 import { ENEMY_IN_VIEW_DIS } from '../Configs/Configs';
 import { SpwanManager } from '../Enemys/SpwanManager';
+import { ZuanshiManager } from '../Item/ZuanshiManager';
 import { PlayerManager } from '../Player/PlayerManager';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
@@ -25,6 +26,11 @@ export class Enemy extends Component {
     InViewTag: boolean = false;
     // 跟风暴接触的时候，需要变成蓝色并减速
     _isContactWithStorm: boolean = false;
+
+    generateZuanshi() {
+        const zuanshi = ZuanshiManager.Instance.getZuanshi();
+        zuanshi.setPosition(this.node.getPosition())
+    }
 
     init() {
         this.Player = Datamanager.Instance.Player;
@@ -76,6 +82,8 @@ export class Enemy extends Component {
             if (Datamanager.Instance.targetEnemy === this) {
                 Datamanager.Instance.targetEnemy = null;
             }
+            this.generateZuanshi();
+
             // 如果当前的敌人就是现在这个敌人，那么就将敌人回收至对象池中
             if (SpwanManager.Instance.currentEnemy === this.node.name) {
                 this.node.active = false;
