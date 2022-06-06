@@ -71,7 +71,6 @@ export class SpwanManager extends Singleton {
     createEnemy() {
         let pos = new Vec3();
         const plyaerPos = Datamanager.Instance.Player.getPlayer().getPosition()
-        console.log('enemyPool', this._enemyPools)
         for (let i = 0; i < ENMEY_PER_WAVE; i++) {
 
             let t = Math.random() + 0.5;

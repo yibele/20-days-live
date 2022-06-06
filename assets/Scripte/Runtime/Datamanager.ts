@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Vec2, RigidBody2D, Prefab } from 'cc';
+import { _decorator, Component, Node, Vec2, RigidBody2D, Prefab, UITransformComponent } from 'cc';
 import { Enemy } from '../Base/Enemy';
 import { EVENT_TYPE } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
@@ -8,13 +8,16 @@ import { CameraManager } from '../Camera/CameraManager';
 import { PLAYER_CONFIG, PLAYER_INIT_SPEED } from '../Configs/Configs';
 import { SpwanManager } from '../Enemys/SpwanManager';
 import { JIngyantiao } from '../Item/JIngyantiao';
+import { UImanager } from '../Item/UImanager';
 import { PlayerManager } from '../Player/PlayerManager';
 import { PlayerStateMachine } from '../Player/PlayerStateMachine';
 import { RockerManager } from '../Rocker/RockerManager';
+import { EventManger } from './EventManger';
 const { ccclass, property } = _decorator;
 
 @ccclass('Datamanager')
 export class Datamanager extends Singleton {
+    // 玩家技能相关东西都在Schudlehandler中
     // 经验条
     jingyantiao: JIngyantiao = null;
     // 钻石吸收的距离
@@ -55,13 +58,27 @@ export class Datamanager extends Singleton {
 
     Prefabs: Prefab[] = new Array();
 
+    // 控制其保存
+    uiManager: UImanager = null;
+
     static get Instance() {
         return super.getInstance<Datamanager>();
     }
 
     set currentEx(newEx: number) {
-        this.currentEx = newEx;
+        // 从 Zhuanshi component调用 的
+        this._currentEx = newEx;
+        const totalBarLen = this.jingyantiao.getBgLen();
+        if (this._currentEx >= 100) {
+            this.currentEx = 0;
+            // 人物升级
+            EventManger.Instance.emit(EVENT_TYPE.PLAYER_UPGRADE)
+        }
+        // 按照比例设置血条
+        const trueBarLen = this._currentEx / this.maxEx * totalBarLen;
+        // 如果经验条大于100 的话，那就升级
         // 经验条render逻辑
+        this.jingyantiao.setBar(trueBarLen)
     }
 
     get currentEx() {

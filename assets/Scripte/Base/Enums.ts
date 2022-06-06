@@ -6,7 +6,17 @@ export enum EVENT_TYPE {
     RESET_PARAMS = "RESET_PARAMS",
     PLAYER_FIRE = "PLAYER_FIRE",
     GET_ENEMY = "GET_ENEMY",
-    PUSH_ENEMY = 'PUSH_ENEMY'
+    PUSH_ENEMY = 'PUSH_ENEMY',
+    PLAYER_UPGRADE = "PLAYER_UPGRADE",
+    SHOW_UPGRADE_AWARD = "SHOW_UPGRADE_AWARD",
+    PLAYER_INCREASE_SPEED = 'PLAYER_INCREASE_SPEED',
+    PLAYER_INCREASE_LIFE = "PLAYER_INCREASE_LIFE"
+}
+
+// 增加的类型，如 增加生命的话，是按照百分比增加还是按照数值增加
+export enum INCRESE_TYPE {
+    PERSENT = "PERSENT",
+    NUMBER = "NUMBER"
 }
 
 // 有限状态机中的Pamras类型
@@ -36,4 +46,10 @@ export enum PLAYER_ANIMATION_ENUM {
 export enum EFFECT_NAME_ENUM {
     EFFECT_BULLET = "EFFECT_BULLET",
     STORM = "STORM"
+}
+
+/** 技能升级之后的奖励类型 */
+export enum AWARD_ENUM {
+    JINENG = "JINENG", // 技能部分
+    SHUXING = "SHUXING" // 属性部分
 }

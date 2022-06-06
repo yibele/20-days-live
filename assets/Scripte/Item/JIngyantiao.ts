@@ -8,11 +8,17 @@ export class JIngyantiao extends Component {
     label: Label = null;
     @property(Node)
     bar: Node = null;
+    @property(Node)
+    bg: Node = null;
 
     barSize: number;
 
     start() {
         this.init();
+    }
+
+    getBgLen() {
+        return this.bg.getComponent(UITransformComponent).width;
     }
 
     init() {

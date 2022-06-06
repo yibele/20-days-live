@@ -1,3 +1,4 @@
+
 //玩家初始速度
 export const PLAYER_INIT_SPEED = 3;
 //玩家初始生命
@@ -12,7 +13,6 @@ export const PLAYER_CONFIG = {
     PLAYER_INIT_LIFE,
     PLAYER_FIRE_INTERNAL
 }
-
 
 // 敌人初始速度
 export const ENMEY_INIT_SPPED = 2;
@@ -33,8 +33,6 @@ export const ENEMY_IN_VIEW_DIS = 350;
 //子弹速度
 export const BULLET_SPEED = 5;
 
-
-
 // 所有特效设置
 const STORM_EXIT_TIME = 2;
 const STORM_SPEED = 5;
@@ -44,7 +42,6 @@ export const STORM_CONFIG = {
     STORM_EXIT_TIME, STORM_SPEED, STORM_DAMAGE, STORM_INTERVAL
 }
 
-
 /*********** 钻石相关设置，经验相关设置**********/
 // 钻石吸收的距离
 export const ZUANSHI_XISHOU_LEN = 20;
@@ -52,3 +49,12 @@ export const ZUANSHI_XISHOU_LEN = 20;
 export const ZUANSHI_JINGYAN = 20;
 
 
+/** 技能相关的设定 */
+export const AWARDS = {
+    'JINENG': {
+
+    },
+    "SHUXING": {
+
+    }
+}

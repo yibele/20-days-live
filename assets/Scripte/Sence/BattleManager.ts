@@ -7,6 +7,7 @@ import { Datamanager } from '../Runtime/Datamanager';
 import { AssetManager } from '../Runtime/AssetManager';
 import { SpwanManager } from "../Enemys/SpwanManager"
 import { SchudleHandler } from '../SchudleHandler/SchudleHandler';
+import { UImanager } from '../Item/UImanager';
 const { ccclass, property } = _decorator;
 
 @ccclass('BattleManager')
@@ -24,6 +25,7 @@ export class BattleManager extends Component {
         this.initRocker();
         this.initCamera();
         this.generateSpwanManager();
+        this.initUImanager();
         // 特效功能
         SchudleHandler.Instance.init();
         // save rootNode
@@ -42,6 +44,11 @@ export class BattleManager extends Component {
         const prefabs = await AssetManager.Intance.loadPrefab('Prefab')
         console.log(prefabs)
         Datamanager.Instance.Prefabs = prefabs;
+    }
+
+    initUImanager() {
+        const uiManager = new UImanager();
+        uiManager.init();
     }
 
     initCamera() {

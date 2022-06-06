@@ -1,8 +1,7 @@
 
-import { _decorator, Component, Node, Vec2, RigidBody2D, Collider2D, UITransformComponent, v3, Contact2DType, instantiate, View, Vec3, v2 } from 'cc';
+import { _decorator, Component, Node, Vec2, RigidBody2D, Collider2D, UITransformComponent, v3, Contact2DType, instantiate, View, Vec3, v2, sp } from 'cc';
 import { Enemy } from '../Base/Enemy';
-import { EFFECT_NAME_ENUM, ENTITY_TAG_ENUM, EVENT_TYPE, PARAMS_ENUM_TYPE, STATE_ENUM_TYPE } from '../Base/Enums';
-import { Bullet } from '../Bullet/Bullet';
+import { EFFECT_NAME_ENUM, ENTITY_TAG_ENUM, EVENT_TYPE, INCRESE_TYPE, PARAMS_ENUM_TYPE, STATE_ENUM_TYPE } from '../Base/Enums';
 import { BULLET_SPEED, Enemys, LIFE_BAR_WIDTH, PLAYER_CONFIG } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
@@ -47,15 +46,56 @@ export class PlayerManager extends Component {
         this._fsm = this.addComponent(PlayerStateMachine)
         this._fsm.init();
         // this.fire();
+        this.registerEvents();
+    }
+
+    registerEvents() {
         EventManger.Instance.on(EVENT_TYPE.PLAYER_MOVE, this.move, this)
         EventManger.Instance.on(EVENT_TYPE.PLAYER_HURT, this.hurt, this)
-        // EventManger.Instance.on(EVENT_TYPE.PLAYER_FIRE, this.fire, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_UPGRADE, this.upgrade, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_SPEED, this.increaseSpeed, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_LIFE, this.increaseLife, this)
     }
 
     onDestroy() {
         EventManger.Instance.off(EVENT_TYPE.PLAYER_MOVE, this.move)
         EventManger.Instance.off(EVENT_TYPE.PLAYER_HURT, this.hurt)
-        // EventManger.Instance.off(EVENT_TYPE.PLAYER_FIRE, this.fire)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_UPGRADE, this.upgrade)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_SPEED, this.increaseSpeed)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_LIFE, this.increaseLife)
+    }
+
+
+    /**
+     * 玩家升级
+     */
+    upgrade() {
+        // 首先调用UI模块中的三个选项，让其显示。
+        EventManger.Instance.emit(EVENT_TYPE.SHOW_UPGRADE_AWARD)
+        // 设置玩家属性
+        // 设置钻石经验模块属性
+    }
+
+    /**
+     * 按照百分比增加玩家速度
+     * @param persent 增加速度的百分比
+     */
+    increaseSpeed(persent: number) {
+        let speed = Datamanager.Instance._PlayerCurrentSpeed;
+        speed = speed + speed * persent;
+        Datamanager.Instance._PlayerCurrentSpeed = speed;
+    }
+
+    /**
+     * 增加玩家生命值
+     * @param dixLife 增加的生命力
+     */
+    increaseLife(dixLife: number, tag: INCRESE_TYPE) {
+        if (tag === INCRESE_TYPE.PERSENT) {
+            this._totalLife = this._totalLife * dixLife;
+        } else {
+            this._totalLife += dixLife;
+        }
     }
 
     getPlayerPosition() {
@@ -71,7 +111,6 @@ export class PlayerManager extends Component {
     }
 
     set currentLife(newLife: number) {
-
         this._currentLife = newLife
         if (this._currentLife <= 0) {
             this._currentLife = 0;
@@ -82,6 +121,10 @@ export class PlayerManager extends Component {
 
     hurt(damage: number) {
         this.currentLife -= damage;
+        if (this.currentLife <= 0) {
+            // 玩家死亡
+        }
     }
+
 }
 

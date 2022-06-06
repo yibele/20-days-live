@@ -343,7 +343,7 @@
     "_priority": 1073741824,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 465.2685421994885,
+    "_orthoHeight": 517.3770491803278,
     "_near": 1,
     "_far": 2000,
     "_color": {
@@ -964,7 +964,12 @@
     "label": {
       "__id__": 23
     },
-    "bar": null,
+    "bar": {
+      "__id__": 17
+    },
+    "bg": {
+      "__id__": 13
+    },
     "_id": "7dJuwbgWpDHpPz76dXWjGJ"
   },
   {

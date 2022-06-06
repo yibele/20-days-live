@@ -1,5 +1,4 @@
 import { _decorator, Component, Node, Prefab, instantiate } from 'cc';
-import { Effect } from '../Base/Effect';
 import { EFFECT_NAME_ENUM } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
 import { Bullet } from '../Bullet/Bullet';
@@ -20,10 +19,11 @@ export class SchudleHandler extends Singleton {
     // 已经激活了的特效
     activeEffects: Map<EFFECT_NAME_ENUM, boolean> = new Map();
 
+    /** 风暴特效 */
     // 风暴的pool
     private stormPool: Array<Node> = new Array();
     // 风暴数量
-    private _stormNum: number = 6;
+    private _stormNum: number = 4;
     // 风暴刷新时间
     private _stormInterval: number = STORM_CONFIG.STORM_INTERVAL;
     // 风暴持续时间
@@ -31,6 +31,7 @@ export class SchudleHandler extends Singleton {
     // 风暴的预制体
     private _stormPrefab: Prefab = null;
 
+    /** 子弹特效 */
     // 子弹预制体
     private _bulletPrefab: Prefab = null;
     // 子弹发射间隔
@@ -43,9 +44,22 @@ export class SchudleHandler extends Singleton {
         return super.getInstance<SchudleHandler>();
     }
 
+    setActiveEffect(effectName: EFFECT_NAME_ENUM) {
+        this.activeEffects.set(effectName, true)
+    }
+
+    getActiveEffect() {
+        return this.activeEffects;
+    }
+
+    delActiveEffect(effectName: EFFECT_NAME_ENUM) {
+        this.activeEffects.delete(effectName)
+    }
+
     get stormExitTime() {
         return this._stormExitTime;
     }
+
     set stormExitTime(newTime: number) {
         this.stormExitTime = newTime;
     }
