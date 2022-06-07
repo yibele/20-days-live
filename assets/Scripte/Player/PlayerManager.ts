@@ -130,5 +130,7 @@ export class PlayerManager extends Component {
         EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_SPEED, this.increaseSpeed)
         EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_LIFE, this.increaseLife)
     }
+
+
 }
 

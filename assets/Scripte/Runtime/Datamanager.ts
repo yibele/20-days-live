@@ -1,7 +1,7 @@
 
 import { _decorator, Component, Node, Vec2, Prefab } from 'cc';
 import { Enemy } from '../Base/Enemy';
-import { EVENT_TYPE } from '../Base/Enums';
+import { CHECK_POINT_AWARD_CONTENT, EVENT_TYPE } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
 import { CameraManager } from '../Camera/CameraManager';
 import { PLAYER_CONFIG, PLAYER_INIT_SPEED } from '../Configs/Configs';
@@ -48,18 +48,33 @@ export class Datamanager extends Singleton {
     EnemyInView: Array<Enemy> = new Array();
     // 当前最近的敌人,
     targetEnemy: Enemy = null;
-
+    // 开火间隔
     PlayerFireInternal: number = PLAYER_CONFIG.PLAYER_FIRE_INTERNAL;
-
+    // 状态机
     fsm: PlayerStateMachine = null;
-
+    // 玩家速度
     _PlyaerVelocity: Vec2 = new Vec2();
-    _PlayerCurrentSpeed: number = PLAYER_INIT_SPEED;
-
+    // AssetManager 中获取到的Prefabs
     Prefabs: Prefab[] = new Array();
-
     // 控制其保存
     uiManager: UImanager = null;
+    // 每升一级后的奖励列表
+    awardList: Array<CHECK_POINT_AWARD_CONTENT> = new Array();
+
+    /** 玩家属性列表 */
+    // 玩家速度
+    _PlayerCurrentSpeed: number = PLAYER_INIT_SPEED;
+    // 攻击力
+    PWOER: number = 1;
+    LIFE: number = 100;
+    AMOR: number = 1;
+    // 拾取距离
+    HANDE: number = 20;
+    LUCK: number = 1;
+    COUNT_DAMAGE: number = 2; // 暴击伤害系数
+    COUT: number = 0.05;      // 暴击几率
+    FIRE_INTERVAL: number = 4; // 攻击间隔
+
 
     static get Instance() {
         return super.getInstance<Datamanager>();

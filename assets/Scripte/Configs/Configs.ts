@@ -49,12 +49,6 @@ export const ZUANSHI_XISHOU_LEN = 20;
 export const ZUANSHI_JINGYAN = 20;
 
 
-/** 技能相关的设定 */
-export const AWARDS = {
-    'JINENG': {
+// 普通奖励的数量
+export const CHECK_POINT_AWARD_LEN = 9;
 
-    },
-    "SHUXING": {
-
-    }
-}

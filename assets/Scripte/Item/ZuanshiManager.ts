@@ -16,7 +16,6 @@ export class ZuanshiManager extends Singleton {
     private _prefab: Prefab = null;
     private _initTag: boolean = false;
 
-
     static get Instance() {
         return super.getInstance<ZuanshiManager>()
     }
@@ -54,6 +53,5 @@ export class ZuanshiManager extends Singleton {
         zuanshi.setPosition(v3(3000, 3000, 0))
         this._zuanshiPool.push(zuanshi)
     }
-
 }
 

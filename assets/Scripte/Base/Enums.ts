@@ -55,3 +55,21 @@ export enum AWARD_ENUM {
     JINENG = "JINENG", // 技能部分
     SHUXING = "SHUXING" // 属性部分
 }
+
+export enum CHECK_POINT_AWARD_CONTENT {
+    PWOER = "攻击力 +15%",
+    SPEED = "移动速度 +15%",
+    LIFE = "生命值 +15%",
+    AMOR = "护甲 +2",
+    HANDE = "拾取距离 +1",
+    LUCK = "幸运值 +2",
+    COUT_DAMAGE = "暴击伤害 +15%",
+    COUT = "暴击几率 +5",
+    FIRE_INTERVAL = '攻击速度 +15%',
+}
+
+export enum CHECK_POINT_SPECLE_AWARD {
+
+}
+
+
