@@ -120,21 +120,27 @@ export class Enemy extends Component {
 
 
     updateXY() {
-        // 获得方向向量
-        let pos = this.node.getPosition();
-        let playerPos = this.PlayerNode.getPosition();
-        // 归一化向量
-        let dir = playerPos.subtract(pos)
-        dir.normalize();
-        if (dir.x > 0) {
-            this.node.setScale(v3(1, 1, 1))
-        } else if (dir.x < 0) {
-            this.node.setScale(v3(-1, 1, 1))
+        // 如果处于暂停状态，那么就暂停
+        if (Datamanager.Instance.puasTag === false) {
+            // 获得方向向量
+            let pos = this.node.getPosition();
+            let playerPos = this.PlayerNode.getPosition();
+            // 归一化向量
+            let dir = playerPos.subtract(pos)
+            dir.normalize();
+            if (dir.x > 0) {
+                this.node.setScale(v3(1, 1, 1))
+            } else if (dir.x < 0) {
+                this.node.setScale(v3(-1, 1, 1))
+            } else {
+                this.node.setScale(this.node.getScale())
+            }
+            // 乘以速度
+            this.getComponent(RigidBody2D).linearVelocity = v2(dir.x * this.Speed, dir.y * this.Speed)
         } else {
-            this.node.setScale(this.node.getScale())
+            this.getComponent(RigidBody2D).linearVelocity = v2(0, 0)
         }
-        // 乘以速度
-        this.getComponent(RigidBody2D).linearVelocity = v2(dir.x * this.Speed, dir.y * this.Speed)
+
     }
 
     /**

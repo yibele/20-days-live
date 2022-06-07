@@ -1,9 +1,8 @@
 
-import { _decorator, Component, Node, Vec2, RigidBody2D, Prefab, UITransformComponent } from 'cc';
+import { _decorator, Component, Node, Vec2, Prefab } from 'cc';
 import { Enemy } from '../Base/Enemy';
 import { EVENT_TYPE } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
-import { Storm } from '../Bullet/Storm';
 import { CameraManager } from '../Camera/CameraManager';
 import { PLAYER_CONFIG, PLAYER_INIT_SPEED } from '../Configs/Configs';
 import { SpwanManager } from '../Enemys/SpwanManager';
@@ -17,6 +16,8 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Datamanager')
 export class Datamanager extends Singleton {
+    // 暂停
+    puasTag: boolean = false;
     // 玩家技能相关东西都在Schudlehandler中
     // 经验条
     jingyantiao: JIngyantiao = null;
@@ -27,10 +28,9 @@ export class Datamanager extends Singleton {
     // 升级所需经验
     maxEx: number = 100;
     // 当前玩家等级
-    currentLv: number = 0;
+    private _currentLv: number = 1;
     // 每个钻石获得经验
     zuanshiEx: number = 20;
-
     // 玩家
     Player: PlayerManager = null;
     // 玩家摄像机控制器
@@ -65,13 +65,46 @@ export class Datamanager extends Singleton {
         return super.getInstance<Datamanager>();
     }
 
+    get currentLv() {
+        return this._currentLv;
+    }
+
+    set currentLv(newLv: number) {
+        this._currentLv = newLv;
+        // 渲染
+        this.jingyantiao.label.string = 'LV' + this._currentLv;
+    }
+
+
+    /**
+     * 设置当前经验部分内容
+     * 当前经验大于升级所需经验的时候，
+     * 1、暂停游戏。
+     * 2、增加人物等级
+     * 3、增加升级所需经验
+     * 4、将当前经验设置为零
+     * 5、取消所有特效计时器
+     * 6、取消刷新怪物计时器
+     */
     set currentEx(newEx: number) {
         // 从 Zhuanshi component调用 的
         this._currentEx = newEx;
         const totalBarLen = this.jingyantiao.getBgLen();
-        if (this._currentEx >= 100) {
+        // 如果当前经验大于升级所需经验，那么就升级
+        if (this._currentEx >= this.maxEx) {
+            // 游戏进行暂停
+            this.puasTag = true;
+            // 增加人物等级
+            this.currentLv++;
+            // 提高人物升级所需经验
+            this.maxEx = this.maxEx * 1.3
+            // 设置当前经验为0
             this.currentEx = 0;
-            // 人物升级
+            // 取消所有特效计时器
+            EventManger.Instance.emit(EVENT_TYPE.CANCLE_EFFECT_SCHUDLE)
+            // 取消生成敌人
+            EventManger.Instance.emit(EVENT_TYPE.CANCLE_SPWAN_ENEMY_SCHUDLE)
+            // 人物升级，包括更新人物属性
             EventManger.Instance.emit(EVENT_TYPE.PLAYER_UPGRADE)
         }
         // 按照比例设置血条

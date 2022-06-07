@@ -1,0 +1,154 @@
+{
+  "ver": "1.0.6",
+  "importer": "sprite-atlas",
+  "imported": true,
+  "uuid": "5b15f90c-c9ab-4c4a-a95e-07b483459970",
+  "files": [
+    ".plist",
+    ".json"
+  ],
+  "subMetas": {
+    "f3a9b": {
+      "importer": "sprite-frame",
+      "uuid": "5b15f90c-c9ab-4c4a-a95e-07b483459970@f3a9b",
+      "displayName": "",
+      "id": "f3a9b",
+      "name": "spr_coin_roj_01",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 16,
+        "height": 16,
+        "rawWidth": 16,
+        "rawHeight": 16,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e0073584-c602-4489-850e-499f4364c73c@6c48a",
+        "atlasUuid": "5b15f90c-c9ab-4c4a-a95e-07b483459970"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "fce2b": {
+      "importer": "sprite-frame",
+      "uuid": "5b15f90c-c9ab-4c4a-a95e-07b483459970@fce2b",
+      "displayName": "",
+      "id": "fce2b",
+      "name": "spr_coin_roj_02",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 16,
+        "trimY": 0,
+        "width": 16,
+        "height": 16,
+        "rawWidth": 16,
+        "rawHeight": 16,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e0073584-c602-4489-850e-499f4364c73c@6c48a",
+        "atlasUuid": "5b15f90c-c9ab-4c4a-a95e-07b483459970"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3dd1f": {
+      "importer": "sprite-frame",
+      "uuid": "5b15f90c-c9ab-4c4a-a95e-07b483459970@3dd1f",
+      "displayName": "",
+      "id": "3dd1f",
+      "name": "spr_coin_roj_03",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 32,
+        "trimY": 0,
+        "width": 16,
+        "height": 16,
+        "rawWidth": 16,
+        "rawHeight": 16,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e0073584-c602-4489-850e-499f4364c73c@6c48a",
+        "atlasUuid": "5b15f90c-c9ab-4c4a-a95e-07b483459970"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c330e": {
+      "importer": "sprite-frame",
+      "uuid": "5b15f90c-c9ab-4c4a-a95e-07b483459970@c330e",
+      "displayName": "",
+      "id": "c330e",
+      "name": "spr_coin_roj_04",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 48,
+        "trimY": 0,
+        "width": 16,
+        "height": 16,
+        "rawWidth": 16,
+        "rawHeight": 16,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e0073584-c602-4489-850e-499f4364c73c@6c48a",
+        "atlasUuid": "5b15f90c-c9ab-4c4a-a95e-07b483459970"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "atlasTextureName": "coin.png",
+    "format": 3,
+    "uuid": "5b15f90c-c9ab-4c4a-a95e-07b483459970",
+    "textureUuid": "e0073584-c602-4489-850e-499f4364c73c@6c48a"
+  }
+}

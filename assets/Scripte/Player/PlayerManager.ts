@@ -1,12 +1,17 @@
 
-import { _decorator, Component, Node, Vec2, RigidBody2D, Collider2D, UITransformComponent, v3, Contact2DType, instantiate, View, Vec3, v2, sp } from 'cc';
-import { Enemy } from '../Base/Enemy';
-import { EFFECT_NAME_ENUM, ENTITY_TAG_ENUM, EVENT_TYPE, INCRESE_TYPE, PARAMS_ENUM_TYPE, STATE_ENUM_TYPE } from '../Base/Enums';
-import { BULLET_SPEED, Enemys, LIFE_BAR_WIDTH, PLAYER_CONFIG } from '../Configs/Configs';
+import { _decorator, Component, Node, Vec2, RigidBody2D, UITransformComponent, v3, } from 'cc';
+import { EVENT_TYPE, INCRESE_TYPE, STATE_ENUM_TYPE } from '../Base/Enums';
+import { LIFE_BAR_WIDTH, PLAYER_CONFIG } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
 import { PlayerStateMachine } from './PlayerStateMachine';
 const { ccclass, property } = _decorator;
+
+/**
+ * 因为开发时技术不够成熟，所以导致该模块有如下问题；
+ * 1、玩家的速度以及其他属性保存在dataManager中。
+ * 2、玩家的移动逻辑，move以事件的形式保存在EventManager中。
+ */
 
 @ccclass('PlayerManager')
 export class PlayerManager extends Component {
@@ -49,23 +54,6 @@ export class PlayerManager extends Component {
         this.registerEvents();
     }
 
-    registerEvents() {
-        EventManger.Instance.on(EVENT_TYPE.PLAYER_MOVE, this.move, this)
-        EventManger.Instance.on(EVENT_TYPE.PLAYER_HURT, this.hurt, this)
-        EventManger.Instance.on(EVENT_TYPE.PLAYER_UPGRADE, this.upgrade, this)
-        EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_SPEED, this.increaseSpeed, this)
-        EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_LIFE, this.increaseLife, this)
-    }
-
-    onDestroy() {
-        EventManger.Instance.off(EVENT_TYPE.PLAYER_MOVE, this.move)
-        EventManger.Instance.off(EVENT_TYPE.PLAYER_HURT, this.hurt)
-        EventManger.Instance.off(EVENT_TYPE.PLAYER_UPGRADE, this.upgrade)
-        EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_SPEED, this.increaseSpeed)
-        EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_LIFE, this.increaseLife)
-    }
-
-
     /**
      * 玩家升级
      */
@@ -73,7 +61,7 @@ export class PlayerManager extends Component {
         // 首先调用UI模块中的三个选项，让其显示。
         EventManger.Instance.emit(EVENT_TYPE.SHOW_UPGRADE_AWARD)
         // 设置玩家属性
-        // 设置钻石经验模块属性
+
     }
 
     /**
@@ -115,6 +103,7 @@ export class PlayerManager extends Component {
         if (this._currentLife <= 0) {
             this._currentLife = 0;
         }
+        // render逻辑
         const width = LIFE_BAR_WIDTH / this._totalLife * this._currentLife;
         this._lifeBar.getComponent(UITransformComponent).setContentSize(width, 5)
     }
@@ -126,5 +115,20 @@ export class PlayerManager extends Component {
         }
     }
 
+    registerEvents() {
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_MOVE, this.move, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_HURT, this.hurt, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_UPGRADE, this.upgrade, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_SPEED, this.increaseSpeed, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_LIFE, this.increaseLife, this)
+    }
+
+    onDestroy() {
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_MOVE, this.move)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_HURT, this.hurt)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_UPGRADE, this.upgrade)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_SPEED, this.increaseSpeed)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_LIFE, this.increaseLife)
+    }
 }
 

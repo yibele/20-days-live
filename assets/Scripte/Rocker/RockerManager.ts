@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Vec2, EventTouch, v2, UITransformComponent, RigidBody2D, view } from 'cc';
+import { _decorator, Component, Node, Vec2, EventTouch, v2, UITransformComponent, view } from 'cc';
 import { EVENT_TYPE } from '../Base/Enums';
 import { PlayerManager } from '../Player/PlayerManager';
 import { Datamanager } from '../Runtime/Datamanager';
@@ -65,8 +65,14 @@ export class RockerManager extends Component {
      * fix Plyaer velocity
      */
     fixVelocity() {
-        this._plyaerVelocity.x = Datamanager.Instance._PlayerCurrentSpeed / this._maxDistance * this._disXY.x;
-        this._plyaerVelocity.y = Datamanager.Instance._PlayerCurrentSpeed / this._maxDistance * this._disXY.y;
+        if (Datamanager.Instance.puasTag === false) {
+            this._plyaerVelocity.x = Datamanager.Instance._PlayerCurrentSpeed / this._maxDistance * this._disXY.x;
+            this._plyaerVelocity.y = Datamanager.Instance._PlayerCurrentSpeed / this._maxDistance * this._disXY.y;
+        } else {
+            this._plyaerVelocity.x = 0;
+            this._plyaerVelocity.y = 0;
+        }
+
     }
 
     /**

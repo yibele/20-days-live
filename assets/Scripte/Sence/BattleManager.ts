@@ -42,7 +42,6 @@ export class BattleManager extends Component {
 
     async loadRes() {
         const prefabs = await AssetManager.Intance.loadPrefab('Prefab')
-        console.log(prefabs)
         Datamanager.Instance.Prefabs = prefabs;
     }
 

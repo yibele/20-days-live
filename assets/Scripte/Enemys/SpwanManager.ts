@@ -12,6 +12,9 @@ const { ccclass, property } = _decorator;
  * 刷怪控制器
  * 6.1 设计思路
  * 
+ * @todo 6.7 刷怪的思路需要更改一下，
+ * 当怪物死亡的时候，直接改变怪物的位置到屏幕外面，
+ * 在执行移动逻辑就可以了，以减少系统开销
  */
 @ccclass('SpwanManager')
 export class SpwanManager extends Singleton {
@@ -29,6 +32,10 @@ export class SpwanManager extends Singleton {
 
     get currentEnemy() {
         return this._currentEnemy;
+    }
+
+    cancleSchulder() {
+        this.unscheduleAllCallbacks();
     }
 
     set currentEnemy(enemyName: string) {
@@ -51,6 +58,8 @@ export class SpwanManager extends Singleton {
         EventManger.Instance.on(EVENT_TYPE.GET_ENEMY, this.getEnemy, this)
         // 将敌人放入对象池
         EventManger.Instance.on(EVENT_TYPE.PUSH_ENEMY, this.pushEnemy, this)
+        // 取消计时器注册到事件中心
+        EventManger.Instance.on(EVENT_TYPE.CANCLE_SPWAN_ENEMY_SCHUDLE, this.cancleSchulder, this)
         this.handleSchlder();
         this.spwanEnemy();
     }

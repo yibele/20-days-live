@@ -1,10 +1,11 @@
 import { _decorator, Component, Node, Prefab, instantiate } from 'cc';
-import { EFFECT_NAME_ENUM } from '../Base/Enums';
+import { EFFECT_NAME_ENUM, EVENT_TYPE } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
 import { Bullet } from '../Bullet/Bullet';
 import { Storm } from '../Bullet/Storm';
 import { STORM_CONFIG } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
+import { EventManger } from '../Runtime/EventManger';
 const { ccclass, property } = _decorator;
 
 /**
@@ -44,6 +45,10 @@ export class SchudleHandler extends Singleton {
         return super.getInstance<SchudleHandler>();
     }
 
+    cancleSchulder() {
+        this.unscheduleAllCallbacks();
+    }
+
     setActiveEffect(effectName: EFFECT_NAME_ENUM) {
         this.activeEffects.set(effectName, true)
     }
@@ -67,9 +72,11 @@ export class SchudleHandler extends Singleton {
     init() {
         this.test();
         this.handleSchulder();
+        EventManger.Instance.on(EVENT_TYPE.CANCLE_EFFECT_SCHUDLE, this.cancleSchulder, this)
     }
 
     handleSchulder() {
+        // 如果游戏暂停，那么返回
         // 刷新子弹
         this.handleBullet();
         // 刷新激活的特效
@@ -82,11 +89,13 @@ export class SchudleHandler extends Singleton {
 
     handleBullet() {
         var that = this;
-        this.schedule(() => {
-            const bullet = that.getBullet();
-            const manager = bullet.getComponent(Bullet)
-            manager.init();
-        }, that._bulletInterval)
+        this.schedule(that.bulletSchudle, that._bulletInterval)
+    }
+
+    bulletSchudle() {
+        const bullet = this.getBullet();
+        const manager = bullet.getComponent(Bullet)
+        manager.init();
     }
 
     getBullet() {
@@ -113,12 +122,15 @@ export class SchudleHandler extends Singleton {
         // 如果特效已经激活了的话
         if (this.activeEffects.get(EFFECT_NAME_ENUM.STORM)) {
             var that = this;
-            this.schedule(function () {
-                for (let i = 0; i < that._stormNum; i++) {
-                    let storm = that.getStorm();
-                    storm.getComponent(Storm).init()
-                }
-            }, that._stormInterval)
+            this.schedule(this.stormSchulde, that._stormInterval)
+        }
+    }
+
+    stormSchulde() {
+        var that = this;
+        for (let i = 0; i < that._stormNum; i++) {
+            let storm = that.getStorm();
+            storm.getComponent(Storm).init()
         }
     }
 

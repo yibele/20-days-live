@@ -3,6 +3,7 @@ import { _decorator, Component, Node } from 'cc';
 import { EVENT_TYPE } from '../Base/Enums';
 import { IEventFunc } from '../Base/Interfaces';
 import { Singleton } from '../Base/Singleton';
+import { Datamanager } from './Datamanager';
 const { ccclass, property } = _decorator;
 
 @ccclass('EventManger')
@@ -41,8 +42,9 @@ export class EventManger extends Singleton {
                 ctx ? func.apply(ctx, params) : func(params)
             });
         } else {
-            console.warn("相关方法为注册", eventName)
+            console.warn("相关方法未注册", eventName)
         }
+
     }
 
 }

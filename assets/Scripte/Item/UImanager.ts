@@ -9,16 +9,18 @@ const { ccclass, property } = _decorator;
 export class UImanager extends Component {
 
     private _arwards: Array<string> = new Array();
+    private _upgradeAwardAboard: Node = null;
 
 
     init() {
         Datamanager.Instance.uiManager = this;
         const upgradeAwardAborad = Datamanager.Instance.Prefabs.find(i => i.data.name === 'CheckPointAward')
-        this.node = instantiate(upgradeAwardAborad)
+        this._upgradeAwardAboard = instantiate(upgradeAwardAborad)
         EventManger.Instance.on(EVENT_TYPE.SHOW_UPGRADE_AWARD, this.showAward, this)
     }
 
     onBtn(e) {
+        Datamanager.Instance.puasTag = false;
     }
 
     /**
@@ -38,6 +40,8 @@ export class UImanager extends Component {
         // 随机获取奖励选项
         // 编辑内容显示
         this.generateAwards();
+        this._upgradeAwardAboard.active = true;
+        this._upgradeAwardAboard.setParent(Datamanager.Instance.RootNode)
     }
 
     onDestroy() {
