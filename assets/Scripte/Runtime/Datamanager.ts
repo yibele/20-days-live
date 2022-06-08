@@ -65,7 +65,7 @@ export class Datamanager extends Singleton {
     // 玩家速度
     _PlayerCurrentSpeed: number = PLAYER_INIT_SPEED;
     // 攻击力
-    PWOER: number = 1;
+    PWOER: number = 30;
     LIFE: number = 100;
     AMOR: number = 1;
     // 拾取距离
@@ -115,10 +115,7 @@ export class Datamanager extends Singleton {
             this.maxEx = this.maxEx * 1.3
             // 设置当前经验为0
             this.currentEx = 0;
-            // 取消所有特效计时器
-            EventManger.Instance.emit(EVENT_TYPE.CANCLE_EFFECT_SCHUDLE)
-            // 取消生成敌人
-            EventManger.Instance.emit(EVENT_TYPE.CANCLE_SPWAN_ENEMY_SCHUDLE)
+            EventManger.Instance.emit(EVENT_TYPE.PUAS_GAME)
             // 人物升级，包括更新人物属性
             EventManger.Instance.emit(EVENT_TYPE.PLAYER_UPGRADE)
         }

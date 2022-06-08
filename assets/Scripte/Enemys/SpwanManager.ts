@@ -58,8 +58,10 @@ export class SpwanManager extends Singleton {
         EventManger.Instance.on(EVENT_TYPE.GET_ENEMY, this.getEnemy, this)
         // 将敌人放入对象池
         EventManger.Instance.on(EVENT_TYPE.PUSH_ENEMY, this.pushEnemy, this)
-        // 取消计时器注册到事件中心
-        EventManger.Instance.on(EVENT_TYPE.CANCLE_SPWAN_ENEMY_SCHUDLE, this.cancleSchulder, this)
+        this.beginSwpan();
+    }
+
+    beginSwpan() {
         this.handleSchlder();
         this.spwanEnemy();
     }
@@ -99,6 +101,10 @@ export class SpwanManager extends Singleton {
             this.id++;
             enemy.setPosition(pos)
             enemy.setParent(this.node);
+
+            if (this.id >= 10) {
+                this.currentEnemy = 'Enemy1'
+            }
         }
     }
 

@@ -38,22 +38,22 @@ export class Enemy extends Component {
         this.Collider = this.getComponent(Collider2D);
         this.Collider.on(Contact2DType.BEGIN_CONTACT, this.beginContact, this)
         this.Collider.on(Contact2DType.END_CONTACT, this.endContact, this)
-        // 计时器
-        this.schedule(this.scheduleHandler, 0.5)
+        // 计时器，每隔1分钟计算自身与玩家的距离，如果距离小于一定的值，
+        // 那么就讲自身放入 玩家的攻击列表中。
+        this.schedule(this.scheduleHandler, 1)
     }
 
     beginContact(self: Collider2D, other: Collider2D) {
         if (other.tag === ENTITY_TAG_ENUM.PLAYER) {
-            // this.Player.hurt(this.Damage)
             this.ContactTime++;
-            if (this.ContactTime === 50) {
+            if (this.ContactTime === 20) {
                 EventManger.Instance.emit(EVENT_TYPE.PLAYER_HURT, this.Damage)
                 this.ContactTime = 0;
             }
         } else if (other.tag === ENTITY_TAG_ENUM.BULLET) {
             this.scheduleOnce(() => {
-                // 敌人受到伤害
-                this.hurt(50);
+                // 敌人受到普通攻击伤害
+                this.hurt(Datamanager.Instance.PWOER);
             }, 0.01)
         } else if (other.tag === ENTITY_TAG_ENUM.STORM) {
             // 设置与风暴接触的时候，变色
@@ -177,8 +177,6 @@ export class Enemy extends Component {
     }
 
     // 获取自身与玩家之间的距离
-
-
     endContact(slef: Collider2D, other: Collider2D) {
         switch (other.tag) {
             case ENTITY_TAG_ENUM.STORM:

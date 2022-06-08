@@ -4,6 +4,7 @@ import { CHECK_POINT_AWARD_LEN } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
 import { SchudleHandler } from '../SchudleHandler/SchudleHandler';
+import { CheckPointAward } from './CheckPointAward';
 const { ccclass, property } = _decorator;
 
 @ccclass('UImanager')
@@ -37,14 +38,12 @@ export class UImanager extends Component {
             let c = b + 2;
 
             const awardList: Array<CHECK_POINT_AWARD_CONTENT> = [
-                this.awardNumToEnum(a),
-                this.awardNumToEnum(b),
-                this.awardNumToEnum(c),
+                this.awardNumToEnum(a % 3),
+                this.awardNumToEnum(b % 3),
+                this.awardNumToEnum(c % 3),
             ]
-
-            console.log(awardList)
             Datamanager.Instance.awardList = awardList;
-
+            this._upgradeAwardAboard.getComponent(CheckPointAward).init();
         }
     }
 
@@ -57,17 +56,17 @@ export class UImanager extends Component {
             case 2:
                 return CHECK_POINT_AWARD_CONTENT.LIFE
             case 3:
-                return CHECK_POINT_AWARD_CONTENT.AMOR
+            // return CHECK_POINT_AWARD_CONTENT.AMOR
             case 4:
-                return CHECK_POINT_AWARD_CONTENT.HANDE
+            // return CHECK_POINT_AWARD_CONTENT.HANDE
             case 5:
-                return CHECK_POINT_AWARD_CONTENT.LUCK
+            // return CHECK_POINT_AWARD_CONTENT.LUCK
             case 6:
-                return CHECK_POINT_AWARD_CONTENT.COUT_DAMAGE
+            // return CHECK_POINT_AWARD_CONTENT.COUT_DAMAGE
             case 7:
-                return CHECK_POINT_AWARD_CONTENT.COUT
+            // return CHECK_POINT_AWARD_CONTENT.COUT
             case 8:
-                return CHECK_POINT_AWARD_CONTENT.FIRE_INTERVAL
+            // return CHECK_POINT_AWARD_CONTENT.FIRE_INTERVAL
             default:
                 return CHECK_POINT_AWARD_CONTENT.PWOER
                 break;
@@ -79,8 +78,8 @@ export class UImanager extends Component {
         // 随机获取奖励选项
         // 编辑内容显示
         this.generateAwards();
-        // this._upgradeAwardAboard.active = true;
-        // this._upgradeAwardAboard.setParent(Datamanager.Instance.RootNode)
+        this._upgradeAwardAboard.active = true;
+        this._upgradeAwardAboard.setParent(Datamanager.Instance.RootNode)
     }
 
     onDestroy() {

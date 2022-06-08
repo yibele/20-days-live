@@ -1,6 +1,6 @@
 
 import { _decorator, Component, Node, Vec2, RigidBody2D, UITransformComponent, v3, } from 'cc';
-import { EVENT_TYPE, INCRESE_TYPE, STATE_ENUM_TYPE } from '../Base/Enums';
+import { CHECK_POINT_AWARD_CONTENT, EVENT_TYPE, INCRESE_TYPE, STATE_ENUM_TYPE } from '../Base/Enums';
 import { LIFE_BAR_WIDTH, PLAYER_CONFIG } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
@@ -86,6 +86,11 @@ export class PlayerManager extends Component {
         }
     }
 
+    increasePower(persent: number) {
+        Datamanager.Instance.PWOER = Datamanager.Instance.PWOER * (1 + persent)
+    }
+
+
     getPlayerPosition() {
         return this.node.getPosition();
     }
@@ -112,7 +117,12 @@ export class PlayerManager extends Component {
         this.currentLife -= damage;
         if (this.currentLife <= 0) {
             // 玩家死亡
+            this.dead();
         }
+    }
+
+    dead() {
+
     }
 
     registerEvents() {
@@ -121,6 +131,7 @@ export class PlayerManager extends Component {
         EventManger.Instance.on(EVENT_TYPE.PLAYER_UPGRADE, this.upgrade, this)
         EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_SPEED, this.increaseSpeed, this)
         EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_LIFE, this.increaseLife, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_POWER, this.increaseLife, this)
     }
 
     onDestroy() {
@@ -129,6 +140,7 @@ export class PlayerManager extends Component {
         EventManger.Instance.off(EVENT_TYPE.PLAYER_UPGRADE, this.upgrade)
         EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_SPEED, this.increaseSpeed)
         EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_LIFE, this.increaseLife)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_POWER, this.increaseLife)
     }
 
 

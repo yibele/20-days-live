@@ -8,6 +8,8 @@ import { AssetManager } from '../Runtime/AssetManager';
 import { SpwanManager } from "../Enemys/SpwanManager"
 import { SchudleHandler } from '../SchudleHandler/SchudleHandler';
 import { UImanager } from '../Item/UImanager';
+import { EventManger } from '../Runtime/EventManger';
+import { EVENT_TYPE } from '../Base/Enums';
 const { ccclass, property } = _decorator;
 
 @ccclass('BattleManager')
@@ -32,6 +34,11 @@ export class BattleManager extends Component {
         Datamanager.Instance.RootNode = this.node;
         // save PlayerPrefab
         Datamanager.Instance.PlayerPrefab = this.Player;
+        // 注册暂停游戏功能
+        EventManger.Instance.on(EVENT_TYPE.PUAS_GAME, this.puasGame, this)
+        // 注册恢复游戏功能
+        EventManger.Instance.on(EVENT_TYPE.RESUME_GAME, this.resumeGame, this)
+
 
     }
 
@@ -71,6 +78,26 @@ export class BattleManager extends Component {
         const rockerManager = Rocker.addComponent(RockerManager);
         rockerManager.init();
         Datamanager.Instance.Rocker = rockerManager;
+    }
+
+    puasGame() {
+        Datamanager.Instance.puasTag = true;
+        SpwanManager.Instance.cancleSchulder();
+        SchudleHandler.Instance.cancleSchulder();
+    }
+
+    /**
+     * 恢复游戏
+     */
+    resumeGame() {
+        SpwanManager.Instance.beginSwpan();
+        SchudleHandler.Instance.handleSchulder();
+        Datamanager.Instance.puasTag = false;
+    }
+
+    onDestroy() {
+        EventManger.Instance.off(EVENT_TYPE.RESUME_GAME, this.resumeGame)
+        EventManger.Instance.off(EVENT_TYPE.PUAS_GAME, this.puasGame)
     }
 
     start() {

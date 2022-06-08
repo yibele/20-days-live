@@ -12,7 +12,10 @@ export enum EVENT_TYPE {
     PLAYER_INCREASE_SPEED = 'PLAYER_INCREASE_SPEED',
     PLAYER_INCREASE_LIFE = "PLAYER_INCREASE_LIFE",
     CANCLE_EFFECT_SCHUDLE = "CANCLE_EFFECT_SCHUDLE",
-    CANCLE_SPWAN_ENEMY_SCHUDLE = "CANCLE_SPWAN_ENEMY_SCHUDLE"
+    CANCLE_SPWAN_ENEMY_SCHUDLE = "CANCLE_SPWAN_ENEMY_SCHUDLE",
+    PLAYER_INCREASE_POWER = "PLAYER_INCREASE_POWER",
+    RESUME_GAME = 'RESUME_GAME',
+    PUAS_GAME = "PUAS_GAME"
 }
 
 // 增加的类型，如 增加生命的话，是按照百分比增加还是按照数值增加
@@ -60,12 +63,12 @@ export enum CHECK_POINT_AWARD_CONTENT {
     PWOER = "攻击力 +15%",
     SPEED = "移动速度 +15%",
     LIFE = "生命值 +15%",
-    AMOR = "护甲 +2",
-    HANDE = "拾取距离 +1",
-    LUCK = "幸运值 +2",
-    COUT_DAMAGE = "暴击伤害 +15%",
-    COUT = "暴击几率 +5",
-    FIRE_INTERVAL = '攻击速度 +15%',
+    // AMOR = "护甲 +2",
+    // HANDE = "拾取距离 +1",
+    // LUCK = "幸运值 +2",
+    // COUT_DAMAGE = "暴击伤害 +15%",
+    // COUT = "暴击几率 +5",
+    // FIRE_INTERVAL = '攻击速度 +15%',
 }
 
 export enum CHECK_POINT_SPECLE_AWARD {

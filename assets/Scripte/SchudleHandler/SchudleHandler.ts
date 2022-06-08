@@ -72,7 +72,6 @@ export class SchudleHandler extends Singleton {
     init() {
         this.test();
         this.handleSchulder();
-        EventManger.Instance.on(EVENT_TYPE.CANCLE_EFFECT_SCHUDLE, this.cancleSchulder, this)
     }
 
     handleSchulder() {
