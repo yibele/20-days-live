@@ -10,8 +10,8 @@ export class Enemy2 extends Enemy {
     init() {
         super.init();
         this.Speed = 2;
-        this.Damage = 20;
-        this.Left = 400;
+        this.Damage = 15;
+        this.Left = 100;
     }
 }
 

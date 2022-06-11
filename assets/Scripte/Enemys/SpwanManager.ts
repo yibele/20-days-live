@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Prefab, instantiate, view, Vec3 } from 'cc';
+import { _decorator, Component, Node, instantiate, view, Vec3 } from 'cc';
 import { Enemy } from '../Base/Enemy';
 import { EVENT_TYPE } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
@@ -22,7 +22,6 @@ export class SpwanManager extends Singleton {
     private _enemyPools: Array<Node> = new Array();
     // 当前应当刷新的敌人
     private _currentEnemy: string = 'Enemy2'
-
     private enemy: Node = null;
     private id = 0;
 
@@ -86,25 +85,30 @@ export class SpwanManager extends Singleton {
 
             let t = Math.random() + 0.5;
             let z = Math.random() + 0.5;
+            let x = Math.random() + 0.5;
+            let p = Math.random();
             // 随机生成-1 或者 1
             let f = 1;
-            if (t < 0.75) {
+            let ff = 1;
+            if (x < 0.75) {
                 f = 1;
             } else {
                 f = -1;
             }
 
+            if (p < 0.5) {
+                ff = 1;
+            } else {
+                ff = -1;
+            }
             pos.x = plyaerPos.x + view.getVisibleSize().width * f * t;
-            pos.y = plyaerPos.y + view.getVisibleSize().height * f * z;
+            pos.y = plyaerPos.y + view.getVisibleSize().height * ff * z;
             const enemy = this.getEnemy();
             enemy.getComponent(Enemy)._enemyId = this.id;
             this.id++;
             enemy.setPosition(pos)
             enemy.setParent(this.node);
 
-            if (this.id >= 10) {
-                this.currentEnemy = 'Enemy1'
-            }
         }
     }
 

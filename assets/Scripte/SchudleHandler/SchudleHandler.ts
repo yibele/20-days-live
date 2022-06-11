@@ -1,9 +1,11 @@
 import { _decorator, Component, Node, Prefab, instantiate } from 'cc';
+import { Effect } from '../Base/Effect';
 import { EFFECT_NAME_ENUM, EVENT_TYPE } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
 import { Bullet } from '../Bullet/Bullet';
+import { Spell } from '../Bullet/Spell';
 import { Storm } from '../Bullet/Storm';
-import { STORM_CONFIG } from '../Configs/Configs';
+import { SPELL_CONFIG, STORM_CONFIG } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
 import { EventManger } from '../Runtime/EventManger';
 const { ccclass, property } = _decorator;
@@ -24,13 +26,19 @@ export class SchudleHandler extends Singleton {
     // 风暴的pool
     private stormPool: Array<Node> = new Array();
     // 风暴数量
-    private _stormNum: number = 4;
+    private _stormNum: number = 1;
     // 风暴刷新时间
     private _stormInterval: number = STORM_CONFIG.STORM_INTERVAL;
     // 风暴持续时间
     private _stormExitTime: number = STORM_CONFIG.STORM_EXIT_TIME;
     // 风暴的预制体
     private _stormPrefab: Prefab = null;
+
+    // Spell特效
+    private _spellInterval: number = SPELL_CONFIG.SPELL_INTERVAL;
+    private _spellExitTime: number = SPELL_CONFIG.SPELL_EXIT_TIME;
+    _spell: Node = null;
+    private _spellRang: number = SPELL_CONFIG.SPELL_RANG;
 
     /** 子弹特效 */
     // 子弹预制体
@@ -43,6 +51,10 @@ export class SchudleHandler extends Singleton {
 
     static get Instance() {
         return super.getInstance<SchudleHandler>();
+    }
+
+    enalbeEffect(effectName: EFFECT_NAME_ENUM) {
+        this.setActiveEffect(effectName)
     }
 
     cancleSchulder() {
@@ -61,6 +73,14 @@ export class SchudleHandler extends Singleton {
         this.activeEffects.delete(effectName)
     }
 
+    set spellRange(newRang: number) {
+        this._spellRang = newRang;
+    }
+
+    get spellRange() {
+        return this._spellRang;
+    }
+
     get stormExitTime() {
         return this._stormExitTime;
     }
@@ -69,9 +89,33 @@ export class SchudleHandler extends Singleton {
         this.stormExitTime = newTime;
     }
 
+    get spellExitTime() {
+        return this._spellExitTime;
+    }
+
+    set spellExitTime(newTIme: number) {
+        this._spellExitTime = newTIme;
+    }
+
     init() {
         this.test();
         this.handleSchulder();
+        // 注册特效
+        EventManger.Instance.on(EVENT_TYPE.ENABLE_EFFECT, this.enalbeEffect, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_FIRE_INTERVAL, this.increaseFireInterval, this)
+
+
+    }
+
+
+    onDestroy() {
+        EventManger.Instance.off(EVENT_TYPE.ENABLE_EFFECT, this.enalbeEffect)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_FIRE_INTERVAL, this.increaseFireInterval)
+    }
+
+    /** 攻击速度增加 */
+    increaseFireInterval(persent: number) {
+        this._bulletInterval *= (1 - persent)
     }
 
     handleSchulder() {
@@ -84,6 +128,7 @@ export class SchudleHandler extends Singleton {
 
     handleEffect() {
         this.handleStorm();
+        this.handleSpell();
     }
 
     handleBullet() {
@@ -114,6 +159,7 @@ export class SchudleHandler extends Singleton {
         this._bulletPool.push(bullet)
     }
 
+
     /**
      * 风暴特效刷新
      */
@@ -125,7 +171,28 @@ export class SchudleHandler extends Singleton {
         }
     }
 
+    handleSpell() {
+        if (this.activeEffects.get(EFFECT_NAME_ENUM.SPELL)) {
+            var that = this;
+            this.schedule(this.SpellSchudle, this._spellInterval)
+        }
+    }
+
+
+    SpellSchudle() {
+        var that = this;
+        const spellPrefab = Datamanager.Instance.Prefabs.find(i => i.data.name === EFFECT_NAME_ENUM.SPELL)
+        if (this._spell === null) {
+            this._spell = instantiate(spellPrefab)
+            this._spell.setParent(Datamanager.Instance.RootNode)
+        }
+        this._spell.addComponent(Spell).init(this._spellExitTime);
+    }
+
     stormSchulde() {
+        if (Datamanager.Instance.EnemyInView.length <= 0) {
+            return;
+        }
         var that = this;
         for (let i = 0; i < that._stormNum; i++) {
             let storm = that.getStorm();
@@ -133,12 +200,15 @@ export class SchudleHandler extends Singleton {
         }
     }
 
+
+
     cancleShudle(func: Function) {
         this.unschedule(func)
     }
 
     // 从对象池获取Storm
     getStorm() {
+
         if (this.stormPool.length > 0) {
             const storm = this.stormPool.pop();
             return storm;
@@ -157,11 +227,11 @@ export class SchudleHandler extends Singleton {
         this.stormPool.push(storm)
     }
 
-
+    /** test */
     test() {
+        this.activeEffects.set(EFFECT_NAME_ENUM.SPELL, true)
         this.activeEffects.set(EFFECT_NAME_ENUM.STORM, true)
     }
-
 
 }
 

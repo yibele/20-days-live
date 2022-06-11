@@ -1,6 +1,6 @@
 
 import { _decorator, Component, Node, Collider2D, Contact2DType, Vec3, RigidBody2D, v2, v3, spriteAssembler, Sprite, math } from 'cc';
-import { ENEMY_IN_VIEW_DIS } from '../Configs/Configs';
+import { ENEMY_IN_VIEW_DIS, SPELL_CONFIG, STORM_CONFIG } from '../Configs/Configs';
 import { SpwanManager } from '../Enemys/SpwanManager';
 import { ZuanshiManager } from '../Item/ZuanshiManager';
 import { PlayerManager } from '../Player/PlayerManager';
@@ -44,29 +44,32 @@ export class Enemy extends Component {
     }
 
     beginContact(self: Collider2D, other: Collider2D) {
-        if (other.tag === ENTITY_TAG_ENUM.PLAYER) {
-            this.ContactTime++;
-            if (this.ContactTime === 20) {
-                EventManger.Instance.emit(EVENT_TYPE.PLAYER_HURT, this.Damage)
-                this.ContactTime = 0;
-            }
-        } else if (other.tag === ENTITY_TAG_ENUM.BULLET) {
-            this.scheduleOnce(() => {
-                // 敌人受到普通攻击伤害
-                this.hurt(Datamanager.Instance.PWOER);
-            }, 0.01)
-        } else if (other.tag === ENTITY_TAG_ENUM.STORM) {
-            // 设置与风暴接触的时候，变色
-            if (this._isContactWithStorm === false) {
-                // this.getComponent(Sprite).color = math.color(0, 141, 153, 255)
-                this.Speed = 0
-                if (this.Speed <= 0) {
-                    this.Speed = 0;
+
+        switch (other.tag) {
+            case ENTITY_TAG_ENUM.PLAYER:
+                this.ContactTime++;
+                if (this.ContactTime === 20) {
+                    EventManger.Instance.emit(EVENT_TYPE.PLAYER_HURT, this.Damage)
+                    this.ContactTime = 0;
                 }
-            }
-            this.scheduleOnce(() => {
-                this.hurt(5)
-            }, 0.01)
+                break;
+            case ENTITY_TAG_ENUM.STORM:
+                this.scheduleOnce(() => {
+                    // 敌人受到普通攻击伤害
+                    this.hurt(Datamanager.Instance.PWOER);
+                }, 0.01)
+                break;
+            case ENTITY_TAG_ENUM.STORM:
+                this.scheduleOnce(() => {
+                    this.hurt(5)
+                }, 0.01)
+                break;
+            case ENTITY_TAG_ENUM.SPELL:
+                this.scheduleOnce(() => {
+                    this.hurt(SPELL_CONFIG.SPELL_DAMAGE)
+                }, 0.01)
+            default:
+                break;
         }
     }
 

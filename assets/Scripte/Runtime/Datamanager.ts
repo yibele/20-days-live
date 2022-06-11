@@ -1,18 +1,22 @@
 
 import { _decorator, Component, Node, Vec2, Prefab } from 'cc';
 import { Enemy } from '../Base/Enemy';
-import { CHECK_POINT_AWARD_CONTENT, EVENT_TYPE } from '../Base/Enums';
+import { CHECK_POINT_AWARD_CONTENT, EFFECT_NAME_ENUM, EVENT_TYPE } from '../Base/Enums';
 import { Singleton } from '../Base/Singleton';
 import { CameraManager } from '../Camera/CameraManager';
 import { PLAYER_CONFIG, PLAYER_INIT_SPEED } from '../Configs/Configs';
 import { SpwanManager } from '../Enemys/SpwanManager';
 import { JIngyantiao } from '../Item/JIngyantiao';
-import { UImanager } from '../Item/UImanager';
+import { ICheckPointWard, UImanager } from '../Item/UImanager';
 import { PlayerManager } from '../Player/PlayerManager';
 import { PlayerStateMachine } from '../Player/PlayerStateMachine';
 import { RockerManager } from '../Rocker/RockerManager';
 import { EventManger } from './EventManger';
 const { ccclass, property } = _decorator;
+
+export interface IEffect {
+
+}
 
 @ccclass('Datamanager')
 export class Datamanager extends Singleton {
@@ -22,7 +26,6 @@ export class Datamanager extends Singleton {
     // 经验条
     jingyantiao: JIngyantiao = null;
     // 钻石吸收的距离
-    zuanshiXishouLen: number = 20;
     // 当前经验
     _currentEx: number = 0;
     // 升级所需经验
@@ -59,13 +62,13 @@ export class Datamanager extends Singleton {
     // 控制其保存
     uiManager: UImanager = null;
     // 每升一级后的奖励列表
-    awardList: Array<CHECK_POINT_AWARD_CONTENT> = new Array();
+    awardList: Array<ICheckPointWard> = new Array();
 
     /** 玩家属性列表 */
     // 玩家速度
     _PlayerCurrentSpeed: number = PLAYER_INIT_SPEED;
     // 攻击力
-    PWOER: number = 30;
+    PWOER: number = 100;
     LIFE: number = 100;
     AMOR: number = 1;
     // 拾取距离
@@ -74,6 +77,12 @@ export class Datamanager extends Singleton {
     COUNT_DAMAGE: number = 2; // 暴击伤害系数
     COUT: number = 0.05;      // 暴击几率
     FIRE_INTERVAL: number = 4; // 攻击间隔
+
+    effect: Array<EFFECT_NAME_ENUM> = [
+        EFFECT_NAME_ENUM.STORM,
+        EFFECT_NAME_ENUM.TEST,
+        EFFECT_NAME_ENUM.SPEEL
+    ]
 
 
     static get Instance() {

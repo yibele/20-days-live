@@ -90,6 +90,15 @@ export class PlayerManager extends Component {
         Datamanager.Instance.PWOER = Datamanager.Instance.PWOER * (1 + persent)
     }
 
+    increaseAmour(amour: number) {
+        Datamanager.Instance.AMOR += amour;
+    }
+
+    /** 增加拾取距离 */
+    increaseHande(len: number) {
+        Datamanager.Instance.HANDE += len;
+    }
+
 
     getPlayerPosition() {
         return this.node.getPosition();
@@ -114,7 +123,8 @@ export class PlayerManager extends Component {
     }
 
     hurt(damage: number) {
-        this.currentLife -= damage;
+        // 受到伤害等于 伤害减去护甲
+        this.currentLife = this.currentLife - (damage - Datamanager.Instance.AMOR)
         if (this.currentLife <= 0) {
             // 玩家死亡
             this.dead();
@@ -132,6 +142,8 @@ export class PlayerManager extends Component {
         EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_SPEED, this.increaseSpeed, this)
         EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_LIFE, this.increaseLife, this)
         EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_POWER, this.increaseLife, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_AMOUR, this.increaseAmour, this)
+        EventManger.Instance.on(EVENT_TYPE.PLAYER_INCREASE_HANDE, this.increaseHande, this)
     }
 
     onDestroy() {
@@ -141,6 +153,8 @@ export class PlayerManager extends Component {
         EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_SPEED, this.increaseSpeed)
         EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_LIFE, this.increaseLife)
         EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_POWER, this.increaseLife)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_AMOUR, this.increaseAmour)
+        EventManger.Instance.off(EVENT_TYPE.PLAYER_INCREASE_HANDE, this.increaseHande)
     }
 
 

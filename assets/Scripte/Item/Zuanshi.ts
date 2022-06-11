@@ -23,7 +23,7 @@ export class Zuanshi extends Component {
 
     // 碰撞检测
     update() {
-        if (Vec3.distance(Datamanager.Instance.Player.getPlayerPosition(), this.node.getPosition()) < Datamanager.Instance.zuanshiXishouLen && this.activeTag) {
+        if (Vec3.distance(Datamanager.Instance.Player.getPlayerPosition(), this.node.getPosition()) < Datamanager.Instance.HANDE && this.activeTag) {
             this.activeTag = false;
             this.getZuanshi();
             ZuanshiManager.Instance.pushZuanshi(this.node)

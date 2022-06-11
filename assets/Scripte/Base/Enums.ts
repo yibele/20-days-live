@@ -15,7 +15,11 @@ export enum EVENT_TYPE {
     CANCLE_SPWAN_ENEMY_SCHUDLE = "CANCLE_SPWAN_ENEMY_SCHUDLE",
     PLAYER_INCREASE_POWER = "PLAYER_INCREASE_POWER",
     RESUME_GAME = 'RESUME_GAME',
-    PUAS_GAME = "PUAS_GAME"
+    PUAS_GAME = "PUAS_GAME",
+    ENABLE_EFFECT = 'ENABLE_EFFECT',
+    PLAYER_INCREASE_AMOUR = 'PLAYER_INCREASE_AMOUR',
+    PLAYER_INCREASE_HANDE = 'PLAYER_INCREASE_HANDE',
+    PLAYER_INCREASE_FIRE_INTERVAL = "PLAYER_INCREASE_FIRE_INTERVAL"
 }
 
 // 增加的类型，如 增加生命的话，是按照百分比增加还是按照数值增加
@@ -40,7 +44,8 @@ export enum ENTITY_TAG_ENUM {
     ENMEY = 1,
     PLAYER = 2,
     BULLET = 3,
-    STORM = 4
+    STORM = 4,
+    SPELL = 5
 }
 
 export enum PLAYER_ANIMATION_ENUM {
@@ -50,7 +55,9 @@ export enum PLAYER_ANIMATION_ENUM {
 
 export enum EFFECT_NAME_ENUM {
     EFFECT_BULLET = "EFFECT_BULLET",
-    STORM = "STORM"
+    STORM = "STORM",
+    TEST = 'TEST',
+    SPELL = "SPELL"
 }
 
 /** 技能升级之后的奖励类型 */
@@ -63,12 +70,12 @@ export enum CHECK_POINT_AWARD_CONTENT {
     PWOER = "攻击力 +15%",
     SPEED = "移动速度 +15%",
     LIFE = "生命值 +15%",
-    // AMOR = "护甲 +2",
-    // HANDE = "拾取距离 +1",
+    AMOR = "护甲 +2",
+    HANDE = "拾取距离 +10",
     // LUCK = "幸运值 +2",
     // COUT_DAMAGE = "暴击伤害 +15%",
     // COUT = "暴击几率 +5",
-    // FIRE_INTERVAL = '攻击速度 +15%',
+    FIRE_INTERVAL = '攻击速度 +15%',
 }
 
 export enum CHECK_POINT_SPECLE_AWARD {

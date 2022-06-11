@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Prefab, instantiate } from 'cc';
+import { _decorator, Component, Node, instantiate } from 'cc';
 import { CHECK_POINT_AWARD_CONTENT, EVENT_TYPE } from '../Base/Enums';
 import { CHECK_POINT_AWARD_LEN } from '../Configs/Configs';
 import { Datamanager } from '../Runtime/Datamanager';
@@ -6,6 +6,11 @@ import { EventManger } from '../Runtime/EventManger';
 import { SchudleHandler } from '../SchudleHandler/SchudleHandler';
 import { CheckPointAward } from './CheckPointAward';
 const { ccclass, property } = _decorator;
+
+export interface ICheckPointWard {
+    type: CHECK_POINT_AWARD_CONTENT,
+    img: string
+}
 
 @ccclass('UImanager')
 export class UImanager extends Component {
@@ -21,12 +26,31 @@ export class UImanager extends Component {
         EventManger.Instance.on(EVENT_TYPE.SHOW_UPGRADE_AWARD, this.showAward, this)
     }
 
+
+    /**
+     * 6.8 生成思路
+     * 1、首先判断激活特效是否小于6
+     */
+    generateSpacileAwards() {
+        // 判断激活特效是否小于最大技能持有特效
+        if (SchudleHandler.Instance.getActiveEffect().size <= 3) {
+            const effects = Datamanager.Instance.effect;
+            const random = Math.floor(Math.random() * effects.length)
+
+        } else if (SchudleHandler.Instance.getActiveEffect().size > 3 && SchudleHandler.Instance.getActiveEffect().size <= 6) {
+
+        } else {
+
+        }
+
+    }
+
     /**
      * 获取奖励的信息，和内容
      */
     generateAwards() {
         // 1、当前玩家所具备的技能数量是否小于6个，
-        if (SchudleHandler.Instance.getActiveEffect().size <= 0) {
+        if (SchudleHandler.Instance.getActiveEffect().size < 0) {
             // 如果小于6个，那就显示混合选项
 
         } else {
@@ -37,11 +61,12 @@ export class UImanager extends Component {
             let b = a + 2;
             let c = b + 2;
 
-            const awardList: Array<CHECK_POINT_AWARD_CONTENT> = [
-                this.awardNumToEnum(a % 3),
-                this.awardNumToEnum(b % 3),
-                this.awardNumToEnum(c % 3),
+            const awardList: Array<ICheckPointWard> = [
+                this.awardNumToEnum(a % this.checkPointAwardLen),
+                this.awardNumToEnum(b % this.checkPointAwardLen),
+                this.awardNumToEnum(c % this.checkPointAwardLen),
             ]
+
             Datamanager.Instance.awardList = awardList;
             this._upgradeAwardAboard.getComponent(CheckPointAward).init();
         }
@@ -50,15 +75,30 @@ export class UImanager extends Component {
     awardNumToEnum(a: number) {
         switch (a) {
             case 0:
-                return CHECK_POINT_AWARD_CONTENT.PWOER
+                return {
+                    type: CHECK_POINT_AWARD_CONTENT.PWOER,
+                    img: "PWOER"
+                }
             case 1:
-                return CHECK_POINT_AWARD_CONTENT.SPEED
+                return {
+                    type: CHECK_POINT_AWARD_CONTENT.SPEED,
+                    img: "SPEED"
+                }
             case 2:
-                return CHECK_POINT_AWARD_CONTENT.LIFE
+                return {
+                    type: CHECK_POINT_AWARD_CONTENT.LIFE,
+                    img: "LIFE"
+                }
             case 3:
-            // return CHECK_POINT_AWARD_CONTENT.AMOR
+                return {
+                    type: CHECK_POINT_AWARD_CONTENT.AMOR,
+                    img: "AMOR"
+                }
             case 4:
-            // return CHECK_POINT_AWARD_CONTENT.HANDE
+                return {
+                    type: CHECK_POINT_AWARD_CONTENT.HANDE,
+                    img: "HANDE"
+                }
             case 5:
             // return CHECK_POINT_AWARD_CONTENT.LUCK
             case 6:
@@ -68,8 +108,10 @@ export class UImanager extends Component {
             case 8:
             // return CHECK_POINT_AWARD_CONTENT.FIRE_INTERVAL
             default:
-                return CHECK_POINT_AWARD_CONTENT.PWOER
-                break;
+                return {
+                    type: CHECK_POINT_AWARD_CONTENT.PWOER,
+                    img: "PWOER"
+                }
         }
     }
 
