@@ -67,6 +67,8 @@ export enum AWARD_ENUM {
 }
 
 export enum CHECK_POINT_AWARD_CONTENT {
+    STORM = "在敌人附近随机生成水晶",
+    SPELL = "围绕自身生成伤害圈",
     PWOER = "攻击力 +15%",
     SPEED = "移动速度 +15%",
     LIFE = "生命值 +15%",
